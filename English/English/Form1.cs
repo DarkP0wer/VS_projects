@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-using System.Net;
-using System.Threading;
-using WMPLib;
 using System.Diagnostics;
-using System.Text.RegularExpressions;
+using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading;
+using System.Windows.Forms;
+using WMPLib;
 
 namespace English
 {
@@ -188,7 +188,7 @@ namespace English
                 var row_CS = row.DefaultCellStyle;
 
                 row_CS.ForeColor = Color.Black;
-                row.Cells["Time_Left"].Value = Config.GetStringTime(timeLeft);
+                row.Cells["T_Left"].Value = Config.GetStringTime(timeLeft);
 
                 if (timeLeft <= (int)Config.TimeInSeconds.Now)
                 {
@@ -229,7 +229,7 @@ namespace English
                 
                 end_row.Cells["ENG"].Value = words[i].Eng;
                 end_row.Cells["RUS"].Value = words[i].Rus;
-                end_row.Cells["Time_Left"].Value = Config.GetStringTime(timeLeft);
+                end_row.Cells["T_Left"].Value = Config.GetStringTime(timeLeft);
                 end_row.Cells["Learn"].Value = "Can't";
                 end_row.Cells["Example"].Value = "Link";
                 end_row.Cells["Time"].Value = words[i].TimeToRemember;
