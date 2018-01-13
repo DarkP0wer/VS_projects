@@ -183,7 +183,7 @@
             this.panel_learn.Controls.Add(this.pictureBox_lrn);
             this.panel_learn.Controls.Add(this.panel_learn_buttuns);
             this.panel_learn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel_learn.Location = new System.Drawing.Point(3, 77);
+            this.panel_learn.Location = new System.Drawing.Point(103, 77);
             this.panel_learn.Name = "panel_learn";
             this.panel_learn.Size = new System.Drawing.Size(686, 246);
             this.panel_learn.TabIndex = 4;
@@ -317,7 +317,7 @@
             this.panel_edt.Controls.Add(this.panel_edt_buttons);
             this.panel_edt.Cursor = System.Windows.Forms.Cursors.SizeAll;
             this.panel_edt.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel_edt.Location = new System.Drawing.Point(3, 77);
+            this.panel_edt.Location = new System.Drawing.Point(103, 77);
             this.panel_edt.Name = "panel_edt";
             this.panel_edt.Size = new System.Drawing.Size(686, 246);
             this.panel_edt.TabIndex = 13;
@@ -569,7 +569,7 @@
             this.dataGridView_DB.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView_DB.EnableHeadersVisualStyles = false;
             this.dataGridView_DB.GridColor = System.Drawing.SystemColors.ActiveBorder;
-            this.dataGridView_DB.Location = new System.Drawing.Point(3, 77);
+            this.dataGridView_DB.Location = new System.Drawing.Point(103, 77);
             this.dataGridView_DB.Margin = new System.Windows.Forms.Padding(0);
             this.dataGridView_DB.MultiSelect = false;
             this.dataGridView_DB.Name = "dataGridView_DB";
@@ -679,9 +679,9 @@
             this.panel_edit_menu.Controls.Add(this.button_word_upd);
             this.panel_edit_menu.Controls.Add(this.button_word_del);
             this.panel_edit_menu.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.panel_edit_menu.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel_edit_menu.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel_edit_menu.ForeColor = System.Drawing.Color.White;
-            this.panel_edit_menu.Location = new System.Drawing.Point(689, 77);
+            this.panel_edit_menu.Location = new System.Drawing.Point(3, 77);
             this.panel_edit_menu.Name = "panel_edit_menu";
             this.panel_edit_menu.Size = new System.Drawing.Size(100, 246);
             this.panel_edit_menu.TabIndex = 5;
