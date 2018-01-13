@@ -15,12 +15,14 @@ namespace English
 {
     public partial class Form1 : Form
     {
-        List<Words> words = null;
+        public WindowsMediaPlayer player = new WindowsMediaPlayer();
+        public List<string> images_base64 = new List<string>();
+        public List<Words> words = null;
+
         int flag_IsLeft = -1;
         Random rand;
         Point cursor_exit = new Point(0, 0);
-        WindowsMediaPlayer player = new WindowsMediaPlayer();
-        List<string> images_base64 = new List<string>();
+        Panel_Learn panel_Learn;
 
 
         public void Translate(string text, string sl, string tl, TextBox tb, bool ao = false, CheckBox checkBox_ao = null, TextBox textBox_ao = null)
@@ -240,7 +242,7 @@ namespace English
         }
 
 
-        private void Reload_Words()
+        public void Reload_Words()
         {
             try
             {
@@ -350,7 +352,7 @@ namespace English
         }
 
 
-        private void control_chg_MouseEnter(object sender, EventArgs e)
+        public void control_chg_MouseEnter(object sender, EventArgs e)
         {
             var control = (Control)sender;
 
@@ -358,7 +360,7 @@ namespace English
         }
 
 
-        private void control_chg_MouseLeave(object sender, EventArgs e)
+        public void control_chg_MouseLeave(object sender, EventArgs e)
         {
             var control = (Control)sender;
             var color = Color.DarkViolet;
@@ -439,6 +441,8 @@ namespace English
             {
                 button_ok.Image = imageList_icons16.Images["edt.ico"];
             }
+
+            dataGridView_DB.Visible = false;
         }
 
 
@@ -446,47 +450,18 @@ namespace English
         {
             panel_word.Visible = false;
             panel_edit_menu.Visible = false;
-            panel_learn.Visible = true;
-
-            try
-            {
-                int i = dataGridView_DB.SelectedCells[0].RowIndex;
-                var row = dataGridView_DB.Rows[i];
-
-                button_lrn_eng.Text = row.Cells["ENG"]
-                                        .Value
-                                        .ToString();
-
-                button_lrn_rus.Text = row.Cells["RUS"]
-                                        .Value
-                                        .ToString();
-
-                label_lrn_eng.Text = $"Print this: {button_lrn_eng.Text}";
-
-
-                new Thread(() => GetImage(button_lrn_eng.Text, pictureBox_lrn)).Start();
-            }
-            catch
-            {
-
-            }
-            textBox_lrn_eng.Text = "";
-            textBox_lrn_eng.Visible = false;
-            label_lrn_eng.Visible = false;
-            button_lrn_rus.Visible = false;
-            button_lrn_ok.Visible = false;
-
-            button_lrn_eng.Image = imageList_icons16.Images["ok_disabled.ico"];
-            button_lrn_rus.Image = imageList_icons16.Images["ok_disabled.ico"];
-            label_lrn_eng.Image = imageList_icons16.Images["ok_disabled.ico"];
+            panel_Learn = new Panel_Learn(this);
+            dataGridView_DB.Visible = false;
         }
 
 
-        private void CloseLarn()
+        public void CloseLarn()
         {
             panel_edit_menu.Visible = true;
-            panel_learn.Visible = false;
             panel_word.Visible = true;
+            panel_Learn.Dispose();
+            panel_Learn = null;
+            dataGridView_DB.Visible = true;
         }
 
 
@@ -496,6 +471,7 @@ namespace English
             panel_edt.Visible = false;
             textBox_eng.Visible = true;
             textBox_rus.Visible = true;
+            dataGridView_DB.Visible = true;
         }
 
 
@@ -555,8 +531,19 @@ namespace English
             #region Buttons
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
             {
+                #region Learn Buttun
+                if (senderGrid.Columns[e.ColumnIndex].HeaderText == "Learn")
+                {
+                    if (senderGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString() != "Learn")
+                    {
+                        MessageBox.Show("You can't learn now!");
+                        return;
+                    }
+                    ShowLearn();
+                }
+                #endregion
                 #region Word Button
-                if (e.ColumnIndex < 2)
+                else
                 {
                     var text = senderGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                     var tk = GoogleTranslate.TL(text);
@@ -567,17 +554,7 @@ namespace English
                 }
 
                 #endregion
-                #region Learn Buttun
-                else
-                {
-                    if (senderGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString() != "Learn")
-                    {
-                        MessageBox.Show("You can't learn now!");
-                        return;
-                    }
-                    ShowLearn();
-                }
-                #endregion
+                
             }
             #endregion
             #region Example link
@@ -826,113 +803,6 @@ namespace English
         }
 
 
-        private void button_lrn_cancel_Click(object sender, EventArgs e)
-        {
-            CloseLarn();
-        }
-
-
-        private void button_lrn_ok_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                var i = dataGridView_DB.SelectedCells[0].RowIndex;
-                Func<int, int> GetNewTime = (t) => Config.GetUnixTime() + t;
-
-                switch (words[i].Step)
-                {
-                    case 0:
-                        words[i].TimeToRemember = GetNewTime((int)Config.TimeInSeconds.Min_15);
-                        break;
-                    case 1:
-                        words[i].TimeToRemember = GetNewTime((int)Config.TimeInSeconds.Hour);
-                        break;
-                    case 2:
-                        words[i].TimeToRemember = GetNewTime((int)Config.TimeInSeconds.Hour_3);
-                        break;
-                    case 3:
-                        words[i].TimeToRemember = GetNewTime((int)Config.TimeInSeconds.Day);
-                        break;
-                    case 4:
-                        words[i].TimeToRemember = GetNewTime((int)Config.TimeInSeconds.Day_2);
-                        break;
-                    case 5:
-                        words[i].TimeToRemember = GetNewTime((int)Config.TimeInSeconds.Day_4);
-                        break;
-                    case 6:
-                        words[i].TimeToRemember = GetNewTime((int)Config.TimeInSeconds.Week);
-                        break;
-                    case 7:
-                        words[i].TimeToRemember = GetNewTime((int)Config.TimeInSeconds.Week_2);
-                        break;
-                    case 8:
-                        words[i].TimeToRemember = GetNewTime((int)Config.TimeInSeconds.Month);
-                        break;
-                    case 9:
-                        words[i].TimeToRemember = GetNewTime((int)Config.TimeInSeconds.Month_6);
-                        break;
-                    default:
-                        words[i].TimeToRemember = GetNewTime((int)Config.TimeInSeconds.Year);
-                        break;
-                }
-                words[i].Step += 1;
-                Reload_Words();
-            }
-            catch { }
-            CloseLarn();
-        }
-
-
-        private void button_lrn_eng_Click(object sender, EventArgs e)
-        {
-            var text = button_lrn_eng.Text;
-            var tk = GoogleTranslate.TL(text);
-            var site = string.Format(Config.g_domain + "_tts?ie=UTF-8&q={0}&tl={1}&tk={2}&client=webapp", Uri.EscapeDataString(text), "en", tk);
-
-            player.URL = site;
-            player.controls.play();
-
-            button_lrn_rus.Visible = true;
-            button_lrn_eng.Image = imageList_icons16.Images["ok_enabled.ico"];
-        }
-
-
-        private void button_lrn_rus_Click(object sender, EventArgs e)
-        {
-            var text = button_lrn_rus.Text;
-            var tk = GoogleTranslate.TL(text);
-            var site = string.Format(Config.g_domain + "_tts?ie=UTF-8&q={0}&tl={1}&tk={2}&client=webapp", Uri.EscapeDataString(text), "ru", tk);
-
-            player.URL = site;
-            player.controls.play();
-
-            label_lrn_eng.Visible = true;
-            textBox_lrn_eng.Visible = true;
-            button_lrn_rus.Image = imageList_icons16.Images["ok_enabled.ico"];
-            textBox_lrn_eng.Focus();
-        }
-
-
-        private void textBox_lrn_eng_TextChanged(object sender, EventArgs e)
-        {
-            if (textBox_lrn_eng.Text.ToLower() == button_lrn_eng.Text.ToLower())
-            {
-                button_lrn_ok.Visible = true;
-                label_lrn_eng.Image = imageList_icons16.Images["ok_enabled.ico"];
-            }
-        }
-
-
-        private void textBox_lrn_eng_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)13)
-            {
-                if (button_lrn_ok.Visible)
-                    button_lrn_ok.PerformClick();
-            }
-        }
-
-
         private void textBox_edt_eng_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)13)
@@ -948,18 +818,6 @@ namespace English
             {
                 button_ok.PerformClick();
             }
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            pictureBox_lrn.BackgroundImage = Base64ToImage(images_base64[DateTime.Now.Second % images_base64.Count]);
-
-            var text = button_lrn_eng.Text;
-            var tk = GoogleTranslate.TL(text);
-            var site = string.Format(Config.g_domain + "_tts?ie=UTF-8&q={0}&tl={1}&tk={2}&client=webapp", Uri.EscapeDataString(text), "en", tk);
-
-            player.URL = site;
-            player.controls.play();
         }
 
 
