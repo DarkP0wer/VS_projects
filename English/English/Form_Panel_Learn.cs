@@ -39,7 +39,7 @@ namespace English
             this.button_lrn_eng.Cursor = Cursors.Hand;
             this.button_lrn_eng.Dock = DockStyle.Top;
             this.button_lrn_eng.FlatStyle = FlatStyle.Flat;
-            this.button_lrn_eng.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button_lrn_eng.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button_lrn_eng.ForeColor = System.Drawing.Color.DarkViolet;
             this.button_lrn_eng.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button_lrn_eng.Location = new System.Drawing.Point(0, 0);
@@ -110,7 +110,7 @@ namespace English
             this.button_lrn_rus.Cursor = Cursors.Hand;
             this.button_lrn_rus.Dock = DockStyle.Top;
             this.button_lrn_rus.FlatStyle = FlatStyle.Flat;
-            this.button_lrn_rus.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button_lrn_rus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button_lrn_rus.ForeColor = System.Drawing.Color.DarkViolet;
             this.button_lrn_rus.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button_lrn_rus.Location = new System.Drawing.Point(0, 50);
@@ -126,14 +126,14 @@ namespace English
             // label_lrn_eng
             // 
             this.label_lrn_eng.Dock = DockStyle.Top;
-            this.label_lrn_eng.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label_lrn_eng.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label_lrn_eng.ForeColor = System.Drawing.Color.Gold;
             this.label_lrn_eng.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.label_lrn_eng.Location = new System.Drawing.Point(0, 100);
             this.label_lrn_eng.Name = "label_lrn_eng";
             this.label_lrn_eng.Size = new System.Drawing.Size(486, 29);
             this.label_lrn_eng.TabIndex = 19;
-            this.label_lrn_eng.Text = "Print this: ";
+            this.label_lrn_eng.Text = "Print: ";
             this.label_lrn_eng.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // textBox_lrn_eng
@@ -192,7 +192,7 @@ namespace English
                                         .Value
                                         .ToString();
 
-                label_lrn_eng.Text = $"Print this: {button_lrn_eng.Text}";
+                label_lrn_eng.Text = $"Print: \"{button_lrn_eng.Text}\"";
 
 
                 new System.Threading.Thread(() => form.GetImage(button_lrn_eng.Text, pictureBox_lrn)).Start();
