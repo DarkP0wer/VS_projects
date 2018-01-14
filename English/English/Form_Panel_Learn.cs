@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace English
 {
-    public class Panel_Learn
+    public class Form_Panel_Learn
     {
         private Panel panel_learn;
         private TextBox textBox_lrn_eng;
@@ -178,7 +174,7 @@ namespace English
         }
 
 
-        public Panel_Learn(Form1 _form)
+        public Form_Panel_Learn(Form1 _form)
         {
             this.form = _form;
             Init();

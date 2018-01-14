@@ -22,7 +22,8 @@ namespace English
         int flag_IsLeft = -1;
         Random rand;
         Point cursor_exit = new Point(0, 0);
-        Panel_Learn panel_Learn;
+        Form_Panel_Learn panel_Learn;
+        Form_Panel_Edit panel_Edit;
 
 
         public void Translate(string text, string sl, string tl, TextBox tb, bool ao = false, CheckBox checkBox_ao = null, TextBox textBox_ao = null)
@@ -380,7 +381,7 @@ namespace English
         }
 
 
-        private void SelectedRowToEdit()
+        public void SelectedRowToEdit()
         {
             try
             {
@@ -394,15 +395,6 @@ namespace English
                 textBox_rus.Text = row.Cells["RUS"]
                                         .Value
                                         .ToString();
-                textBox_edt_time.Text = row .Cells["Time"]
-                                        .Value
-                                        .ToString();
-                textBox_edt_step.Text = row.Cells["Step"]
-                                        .Value
-                                        .ToString();
-
-                textBox_edt_eng.Text = textBox_eng.Text;
-                textBox_edt_rus.Text = textBox_rus.Text;
             }
             catch { }
         }
@@ -417,30 +409,11 @@ namespace English
         private void ShowEdit(string operation)
         {
             panel_edit_menu.Visible = false;
-            panel_edt.Visible = true;
             textBox_eng.Visible = false;
             textBox_rus.Visible = false;
-            label_edt.Text = operation;
-            textBox_edt_eng.ReadOnly = false;
-            textBox_edt_rus.ReadOnly = false;
-            SelectedRowToEdit();
 
-            if(operation == "INSERT")
-            {
-                textBox_edt_eng.Text = "";
-                textBox_edt_rus.Text = "";
-                button_ok.Image = imageList_icons16.Images["add.ico"];
-            }
-            else if(operation == "DELETE")
-            {
-                textBox_edt_eng.ReadOnly = true;
-                textBox_edt_rus.ReadOnly = true;
-                button_ok.Image = imageList_icons16.Images["del.ico"];
-            }
-            else
-            {
-                button_ok.Image = imageList_icons16.Images["edt.ico"];
-            }
+            panel_Edit = new Form_Panel_Edit(this, operation, dataGridView_DB.SelectedCells[0]?.RowIndex);
+            
 
             dataGridView_DB.Visible = false;
         }
@@ -450,7 +423,7 @@ namespace English
         {
             panel_word.Visible = false;
             panel_edit_menu.Visible = false;
-            panel_Learn = new Panel_Learn(this);
+            panel_Learn = new Form_Panel_Learn(this);
             dataGridView_DB.Visible = false;
         }
 
@@ -465,10 +438,11 @@ namespace English
         }
 
 
-        private void CloseEdit()
+        public void CloseEdit()
         {
             panel_edit_menu.Visible = true;
-            panel_edt.Visible = false;
+            panel_Edit.Dispose();
+            panel_Edit = null;
             textBox_eng.Visible = true;
             textBox_rus.Visible = true;
             dataGridView_DB.Visible = true;
@@ -478,7 +452,6 @@ namespace English
         private void button_word_add_Click(object sender, EventArgs e)
         {
             ShowEdit("INSERT");
-            textBox_edt_eng.Focus();
         }
 
 
@@ -499,17 +472,6 @@ namespace English
         private void button_word_del_Click(object sender, EventArgs e)
         {
             ShowEdit("DELETE");
-        }
-
-
-        private void checkBox_word_more_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox_word_more.Checked)
-            {
-                checkBox_word_more.Visible = false;
-                panel_edt_step.Visible = true;
-                panel_edt_time.Visible = true;
-            }
         }
 
 
@@ -547,7 +509,7 @@ namespace English
                 {
                     var text = senderGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                     var tk = GoogleTranslate.TL(text);
-                    var site = string.Format(Config.g_domain + "_tts?ie=UTF-8&q={0}&tl={1}&tk={2}&client=webapp", Uri.EscapeDataString(text), (e.ColumnIndex == 0 ? "en" : "ru"), tk);
+                    var site = string.Format(Config.g_domain + "_tts?ie=UTF-8&q={0}&tl={1}&tk={2}&client=webapp", Uri.EscapeDataString(text), (senderGrid.Columns[e.ColumnIndex].HeaderText == "ENG" ? "en" : "ru"), tk);
 
                     player.URL = site;
                     player.controls.play();
@@ -635,7 +597,7 @@ namespace English
         }
 
 
-        private void panel_main_MouseDown(object sender, MouseEventArgs e)
+        public void panel_main_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
@@ -682,7 +644,7 @@ namespace English
         }
 
 
-        private void GoToWord(int index, bool accurate = false)
+        public void GoToWord(int index, bool accurate = false)
         {
             try
             {
@@ -710,114 +672,6 @@ namespace English
         private void button_next_word_Click(object sender, EventArgs e)
         {
             GoToWord(1);
-        }
-
-
-        private void button_cancle_Click(object sender, EventArgs e)
-        {
-            CloseEdit();
-        }
-
-
-        private void label_edt_time_Click(object sender, EventArgs e)
-        {
-            textBox_edt_time.Text = Config.GetUnixTime().ToString();
-        }
-
-
-        private void button_ok_Click(object sender, EventArgs e)
-        {
-            switch (label_edt.Text)
-            {
-                case "INSERT":
-                    {
-                        try
-                        {
-                            var secs = 10;
-
-                            words.Add(new Words(    textBox_edt_eng.Text,
-                                                    textBox_edt_rus.Text,
-                                                    (checkBox_word_more.Checked ? 
-                                                        Convert.ToInt32(textBox_edt_time.Text) - secs : 
-                                                        Config.GetUnixTime() + secs
-                                                    ),
-                                                    (checkBox_word_more.Checked ? 
-                                                        Convert.ToInt32(textBox_edt_step.Text) - secs : 
-                                                        0
-                                                    ),
-                                                    0,
-                                                    0
-                                                ));
-                            Reload_Words();
-                        }
-                        catch { }
-                        break;
-                    }
-                case "UPDATE":
-                    {
-                        try
-                         {
-                             int i = dataGridView_DB.SelectedCells[0].RowIndex;
-                             words[i].Eng = textBox_edt_eng.Text;
-                             words[i].Rus = textBox_edt_rus.Text;
-                             words[i].TimeToRemember = Convert.ToInt32(textBox_edt_time.Text);
-                             words[i].Step = Convert.ToInt32(textBox_edt_step.Text);
-                             Reload_Words();
-                         }
-                         catch { }
-                        break;
-                    }
-                case "DELETE":
-                    {
-                        try
-                        {
-                            int i = dataGridView_DB.SelectedCells[0].RowIndex;
-                            words.RemoveAt(i);
-                            Reload_Words();
-                            GoToWord(i, true);
-                        }
-                        catch { }
-                        break;
-                    }
-            }
-
-            CloseEdit();
-        }
-
-
-        private void textBox_edt_eng_TextChanged(object sender, EventArgs e)
-        {
-            timer_edt_translate.Enabled = false;
-            timer_edt_translate.Enabled = true;
-        }
-
-
-        private void timer_edt_translate_Tick(object sender, EventArgs e)
-        {
-            var q = textBox_edt_eng.Text;
-            var sl = "en";
-            var tl = "ru";
-
-            new Thread(() => Translate(q, sl, tl, textBox_edt_rus, false, this.checkBox_ao, this.textBox_ao)).Start();
-            timer_edt_translate.Enabled = false;
-        }
-
-
-        private void textBox_edt_eng_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)13)
-            {
-                textBox_edt_rus.Focus();
-            }
-        }
-        
-
-        private void textBox_edt_rus_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)13)
-            {
-                button_ok.PerformClick();
-            }
         }
 
 

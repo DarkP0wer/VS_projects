@@ -5,7 +5,7 @@
         /// <summary>
         /// Обязательная переменная конструктора.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        public System.ComponentModel.IContainer components = null;
 
         /// <summary>
         /// Освободить все используемые ресурсы.
@@ -29,35 +29,17 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.timer_repaint = new System.Windows.Forms.Timer(this.components);
             this.panel_main = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage_word_book = new System.Windows.Forms.TabPage();
-            this.panel_edt = new System.Windows.Forms.Panel();
-            this.panel_edt_rus = new System.Windows.Forms.Panel();
-            this.textBox_edt_rus = new System.Windows.Forms.TextBox();
-            this.label_edt_rus = new System.Windows.Forms.Label();
-            this.panel_edt_eng = new System.Windows.Forms.Panel();
-            this.textBox_edt_eng = new System.Windows.Forms.TextBox();
-            this.label_edt_eng = new System.Windows.Forms.Label();
-            this.checkBox_word_more = new System.Windows.Forms.CheckBox();
-            this.label_edt = new System.Windows.Forms.Label();
-            this.panel_edt_time = new System.Windows.Forms.Panel();
-            this.textBox_edt_time = new System.Windows.Forms.TextBox();
-            this.label_edt_time = new System.Windows.Forms.Label();
-            this.panel_edt_step = new System.Windows.Forms.Panel();
-            this.textBox_edt_step = new System.Windows.Forms.TextBox();
-            this.label_edt_step = new System.Windows.Forms.Label();
-            this.panel_edt_buttons = new System.Windows.Forms.Panel();
-            this.button_ok = new System.Windows.Forms.Button();
-            this.button_cancle = new System.Windows.Forms.Button();
             this.dataGridView_DB = new System.Windows.Forms.DataGridView();
             this.Learn = new System.Windows.Forms.DataGridViewButtonColumn();
             this.T_Left = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -97,16 +79,9 @@
             this.timer_translate_wait = new System.Windows.Forms.Timer(this.components);
             this.imageList_mouse = new System.Windows.Forms.ImageList(this.components);
             this.imageList_icons16 = new System.Windows.Forms.ImageList(this.components);
-            this.timer_edt_translate = new System.Windows.Forms.Timer(this.components);
             this.panel_main.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage_word_book.SuspendLayout();
-            this.panel_edt.SuspendLayout();
-            this.panel_edt_rus.SuspendLayout();
-            this.panel_edt_eng.SuspendLayout();
-            this.panel_edt_time.SuspendLayout();
-            this.panel_edt_step.SuspendLayout();
-            this.panel_edt_buttons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_DB)).BeginInit();
             this.panel_edit_menu.SuspendLayout();
             this.panel_word.SuspendLayout();
@@ -149,7 +124,6 @@
             // tabPage_word_book
             // 
             this.tabPage_word_book.BackColor = System.Drawing.Color.Black;
-            this.tabPage_word_book.Controls.Add(this.panel_edt);
             this.tabPage_word_book.Controls.Add(this.dataGridView_DB);
             this.tabPage_word_book.Controls.Add(this.panel_edit_menu);
             this.tabPage_word_book.Controls.Add(this.panel_word);
@@ -160,234 +134,7 @@
             this.tabPage_word_book.Size = new System.Drawing.Size(792, 326);
             this.tabPage_word_book.TabIndex = 0;
             this.tabPage_word_book.Text = "WordBook";
-            // 
-            // panel_edt
-            // 
-            this.panel_edt.Controls.Add(this.panel_edt_rus);
-            this.panel_edt.Controls.Add(this.panel_edt_eng);
-            this.panel_edt.Controls.Add(this.checkBox_word_more);
-            this.panel_edt.Controls.Add(this.label_edt);
-            this.panel_edt.Controls.Add(this.panel_edt_time);
-            this.panel_edt.Controls.Add(this.panel_edt_step);
-            this.panel_edt.Controls.Add(this.panel_edt_buttons);
-            this.panel_edt.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.panel_edt.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel_edt.Location = new System.Drawing.Point(103, 77);
-            this.panel_edt.Name = "panel_edt";
-            this.panel_edt.Size = new System.Drawing.Size(686, 246);
-            this.panel_edt.TabIndex = 13;
-            this.panel_edt.Visible = false;
-            this.panel_edt.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel_main_MouseDown);
-            // 
-            // panel_edt_rus
-            // 
-            this.panel_edt_rus.Controls.Add(this.textBox_edt_rus);
-            this.panel_edt_rus.Controls.Add(this.label_edt_rus);
-            this.panel_edt_rus.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel_edt_rus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.panel_edt_rus.Location = new System.Drawing.Point(0, 66);
-            this.panel_edt_rus.Name = "panel_edt_rus";
-            this.panel_edt_rus.Size = new System.Drawing.Size(686, 27);
-            this.panel_edt_rus.TabIndex = 16;
-            // 
-            // textBox_edt_rus
-            // 
-            this.textBox_edt_rus.BackColor = System.Drawing.Color.Black;
-            this.textBox_edt_rus.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox_edt_rus.ForeColor = System.Drawing.Color.Cyan;
-            this.textBox_edt_rus.Location = new System.Drawing.Point(137, 0);
-            this.textBox_edt_rus.Name = "textBox_edt_rus";
-            this.textBox_edt_rus.Size = new System.Drawing.Size(549, 26);
-            this.textBox_edt_rus.TabIndex = 1;
-            this.textBox_edt_rus.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_edt_rus_KeyPress);
-            // 
-            // label_edt_rus
-            // 
-            this.label_edt_rus.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label_edt_rus.ForeColor = System.Drawing.Color.Gold;
-            this.label_edt_rus.Location = new System.Drawing.Point(0, 0);
-            this.label_edt_rus.Name = "label_edt_rus";
-            this.label_edt_rus.Size = new System.Drawing.Size(137, 27);
-            this.label_edt_rus.TabIndex = 0;
-            this.label_edt_rus.Text = "Russian:";
-            this.label_edt_rus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label_edt_rus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel_main_MouseDown);
-            // 
-            // panel_edt_eng
-            // 
-            this.panel_edt_eng.Controls.Add(this.textBox_edt_eng);
-            this.panel_edt_eng.Controls.Add(this.label_edt_eng);
-            this.panel_edt_eng.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel_edt_eng.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.panel_edt_eng.Location = new System.Drawing.Point(0, 39);
-            this.panel_edt_eng.Name = "panel_edt_eng";
-            this.panel_edt_eng.Size = new System.Drawing.Size(686, 27);
-            this.panel_edt_eng.TabIndex = 15;
-            // 
-            // textBox_edt_eng
-            // 
-            this.textBox_edt_eng.BackColor = System.Drawing.Color.Black;
-            this.textBox_edt_eng.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox_edt_eng.ForeColor = System.Drawing.Color.Cyan;
-            this.textBox_edt_eng.Location = new System.Drawing.Point(137, 0);
-            this.textBox_edt_eng.Name = "textBox_edt_eng";
-            this.textBox_edt_eng.Size = new System.Drawing.Size(549, 26);
-            this.textBox_edt_eng.TabIndex = 1;
-            this.textBox_edt_eng.TextChanged += new System.EventHandler(this.textBox_edt_eng_TextChanged);
-            this.textBox_edt_eng.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_edt_eng_KeyPress);
-            // 
-            // label_edt_eng
-            // 
-            this.label_edt_eng.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label_edt_eng.ForeColor = System.Drawing.Color.Gold;
-            this.label_edt_eng.Location = new System.Drawing.Point(0, 0);
-            this.label_edt_eng.Name = "label_edt_eng";
-            this.label_edt_eng.Size = new System.Drawing.Size(137, 27);
-            this.label_edt_eng.TabIndex = 0;
-            this.label_edt_eng.Text = "English:";
-            this.label_edt_eng.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label_edt_eng.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel_main_MouseDown);
-            // 
-            // checkBox_word_more
-            // 
-            this.checkBox_word_more.CheckAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.checkBox_word_more.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.checkBox_word_more.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.checkBox_word_more.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBox_word_more.ForeColor = System.Drawing.Color.Magenta;
-            this.checkBox_word_more.Location = new System.Drawing.Point(0, 105);
-            this.checkBox_word_more.Name = "checkBox_word_more";
-            this.checkBox_word_more.Size = new System.Drawing.Size(686, 37);
-            this.checkBox_word_more.TabIndex = 11;
-            this.checkBox_word_more.TabStop = false;
-            this.checkBox_word_more.Text = "More edit";
-            this.checkBox_word_more.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.checkBox_word_more.UseVisualStyleBackColor = true;
-            this.checkBox_word_more.CheckedChanged += new System.EventHandler(this.checkBox_word_more_CheckedChanged);
-            // 
-            // label_edt
-            // 
-            this.label_edt.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label_edt.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label_edt.ForeColor = System.Drawing.Color.Red;
-            this.label_edt.Location = new System.Drawing.Point(0, 0);
-            this.label_edt.Name = "label_edt";
-            this.label_edt.Size = new System.Drawing.Size(686, 39);
-            this.label_edt.TabIndex = 19;
-            this.label_edt.Text = "EDIT:";
-            this.label_edt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label_edt.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel_main_MouseDown);
-            // 
-            // panel_edt_time
-            // 
-            this.panel_edt_time.Controls.Add(this.textBox_edt_time);
-            this.panel_edt_time.Controls.Add(this.label_edt_time);
-            this.panel_edt_time.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_edt_time.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.panel_edt_time.Location = new System.Drawing.Point(0, 142);
-            this.panel_edt_time.Name = "panel_edt_time";
-            this.panel_edt_time.Size = new System.Drawing.Size(686, 27);
-            this.panel_edt_time.TabIndex = 18;
-            this.panel_edt_time.Visible = false;
-            // 
-            // textBox_edt_time
-            // 
-            this.textBox_edt_time.BackColor = System.Drawing.Color.Black;
-            this.textBox_edt_time.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox_edt_time.ForeColor = System.Drawing.Color.Cyan;
-            this.textBox_edt_time.Location = new System.Drawing.Point(137, 0);
-            this.textBox_edt_time.Name = "textBox_edt_time";
-            this.textBox_edt_time.Size = new System.Drawing.Size(549, 26);
-            this.textBox_edt_time.TabIndex = 1;
-            // 
-            // label_edt_time
-            // 
-            this.label_edt_time.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.label_edt_time.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label_edt_time.ForeColor = System.Drawing.Color.DarkViolet;
-            this.label_edt_time.Location = new System.Drawing.Point(0, 0);
-            this.label_edt_time.Name = "label_edt_time";
-            this.label_edt_time.Size = new System.Drawing.Size(137, 27);
-            this.label_edt_time.TabIndex = 0;
-            this.label_edt_time.Text = "Time (UNIX):";
-            this.label_edt_time.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label_edt_time.Click += new System.EventHandler(this.label_edt_time_Click);
-            // 
-            // panel_edt_step
-            // 
-            this.panel_edt_step.Controls.Add(this.textBox_edt_step);
-            this.panel_edt_step.Controls.Add(this.label_edt_step);
-            this.panel_edt_step.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_edt_step.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.panel_edt_step.Location = new System.Drawing.Point(0, 169);
-            this.panel_edt_step.Name = "panel_edt_step";
-            this.panel_edt_step.Size = new System.Drawing.Size(686, 27);
-            this.panel_edt_step.TabIndex = 17;
-            this.panel_edt_step.Visible = false;
-            // 
-            // textBox_edt_step
-            // 
-            this.textBox_edt_step.BackColor = System.Drawing.Color.Black;
-            this.textBox_edt_step.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox_edt_step.ForeColor = System.Drawing.Color.Cyan;
-            this.textBox_edt_step.Location = new System.Drawing.Point(137, 0);
-            this.textBox_edt_step.Name = "textBox_edt_step";
-            this.textBox_edt_step.Size = new System.Drawing.Size(549, 26);
-            this.textBox_edt_step.TabIndex = 1;
-            // 
-            // label_edt_step
-            // 
-            this.label_edt_step.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label_edt_step.ForeColor = System.Drawing.Color.Gold;
-            this.label_edt_step.Location = new System.Drawing.Point(0, 0);
-            this.label_edt_step.Name = "label_edt_step";
-            this.label_edt_step.Size = new System.Drawing.Size(137, 27);
-            this.label_edt_step.TabIndex = 0;
-            this.label_edt_step.Text = "Step:";
-            this.label_edt_step.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label_edt_step.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel_main_MouseDown);
-            // 
-            // panel_edt_buttons
-            // 
-            this.panel_edt_buttons.Controls.Add(this.button_ok);
-            this.panel_edt_buttons.Controls.Add(this.button_cancle);
-            this.panel_edt_buttons.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_edt_buttons.Location = new System.Drawing.Point(0, 196);
-            this.panel_edt_buttons.Name = "panel_edt_buttons";
-            this.panel_edt_buttons.Size = new System.Drawing.Size(686, 50);
-            this.panel_edt_buttons.TabIndex = 14;
-            this.panel_edt_buttons.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel_main_MouseDown);
-            // 
-            // button_ok
-            // 
-            this.button_ok.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button_ok.Dock = System.Windows.Forms.DockStyle.Right;
-            this.button_ok.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_ok.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button_ok.ForeColor = System.Drawing.Color.Lime;
-            this.button_ok.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button_ok.Location = new System.Drawing.Point(486, 0);
-            this.button_ok.Name = "button_ok";
-            this.button_ok.Size = new System.Drawing.Size(87, 50);
-            this.button_ok.TabIndex = 13;
-            this.button_ok.Text = "OK";
-            this.button_ok.UseVisualStyleBackColor = true;
-            this.button_ok.Click += new System.EventHandler(this.button_ok_Click);
-            // 
-            // button_cancle
-            // 
-            this.button_cancle.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button_cancle.Dock = System.Windows.Forms.DockStyle.Right;
-            this.button_cancle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_cancle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button_cancle.ForeColor = System.Drawing.Color.OrangeRed;
-            this.button_cancle.Location = new System.Drawing.Point(573, 0);
-            this.button_cancle.Name = "button_cancle";
-            this.button_cancle.Size = new System.Drawing.Size(113, 50);
-            this.button_cancle.TabIndex = 12;
-            this.button_cancle.Text = "CANCLE";
-            this.button_cancle.UseVisualStyleBackColor = true;
-            this.button_cancle.Click += new System.EventHandler(this.button_cancle_Click);
+            
             // 
             // dataGridView_DB
             // 
@@ -396,13 +143,13 @@
             this.dataGridView_DB.AllowUserToResizeRows = false;
             this.dataGridView_DB.BackgroundColor = System.Drawing.SystemColors.Desktop;
             this.dataGridView_DB.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Orange;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            this.dataGridView_DB.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.Orange;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            this.dataGridView_DB.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridView_DB.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_DB.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Learn,
@@ -413,14 +160,14 @@
             this.Time,
             this.Step});
             this.dataGridView_DB.Cursor = System.Windows.Forms.Cursors.Default;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Orange;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView_DB.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.Orange;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView_DB.DefaultCellStyle = dataGridViewCellStyle11;
             this.dataGridView_DB.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView_DB.EnableHeadersVisualStyles = false;
             this.dataGridView_DB.GridColor = System.Drawing.SystemColors.ActiveBorder;
@@ -429,14 +176,14 @@
             this.dataGridView_DB.MultiSelect = false;
             this.dataGridView_DB.Name = "dataGridView_DB";
             this.dataGridView_DB.ReadOnly = true;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.Orange;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView_DB.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.Orange;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_DB.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.dataGridView_DB.RowHeadersVisible = false;
             this.dataGridView_DB.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.Black;
             this.dataGridView_DB.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.SystemColors.ActiveBorder;
@@ -471,9 +218,9 @@
             // ENG
             // 
             this.ENG.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.DarkViolet;
-            this.ENG.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.DarkViolet;
+            this.ENG.DefaultCellStyle = dataGridViewCellStyle8;
             this.ENG.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ENG.HeaderText = "ENG";
             this.ENG.Name = "ENG";
@@ -485,9 +232,9 @@
             // RUS
             // 
             this.RUS.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Aqua;
-            this.RUS.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Aqua;
+            this.RUS.DefaultCellStyle = dataGridViewCellStyle9;
             this.RUS.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.RUS.HeaderText = "RUS";
             this.RUS.Name = "RUS";
@@ -518,8 +265,8 @@
             // Step
             // 
             this.Step.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
-            this.Step.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
+            this.Step.DefaultCellStyle = dataGridViewCellStyle10;
             this.Step.HeaderText = "Step";
             this.Step.Name = "Step";
             this.Step.ReadOnly = true;
@@ -1016,11 +763,6 @@
             this.imageList_icons16.Images.SetKeyName(3, "ok_enabled.ico");
             this.imageList_icons16.Images.SetKeyName(4, "ok_disabled.ico");
             // 
-            // timer_edt_translate
-            // 
-            this.timer_edt_translate.Interval = 300;
-            this.timer_edt_translate.Tick += new System.EventHandler(this.timer_edt_translate_Tick);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1049,16 +791,6 @@
             this.panel_main.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage_word_book.ResumeLayout(false);
-            this.panel_edt.ResumeLayout(false);
-            this.panel_edt_rus.ResumeLayout(false);
-            this.panel_edt_rus.PerformLayout();
-            this.panel_edt_eng.ResumeLayout(false);
-            this.panel_edt_eng.PerformLayout();
-            this.panel_edt_time.ResumeLayout(false);
-            this.panel_edt_time.PerformLayout();
-            this.panel_edt_step.ResumeLayout(false);
-            this.panel_edt_step.PerformLayout();
-            this.panel_edt_buttons.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_DB)).EndInit();
             this.panel_edit_menu.ResumeLayout(false);
             this.panel_word.ResumeLayout(false);
@@ -1088,11 +820,10 @@
         private System.Windows.Forms.Button button_word_add;
         private System.Windows.Forms.TextBox textBox_rus;
         private System.Windows.Forms.TextBox textBox_eng;
-        private System.Windows.Forms.CheckBox checkBox_word_more;
         private System.Windows.Forms.Timer timer_retime;
         private System.Windows.Forms.TextBox textBox_text;
         private System.Windows.Forms.Panel panel_translate;
-        private System.Windows.Forms.CheckBox checkBox_ao;
+        public System.Windows.Forms.CheckBox checkBox_ao;
         private System.Windows.Forms.ComboBox comboBox_to;
         private System.Windows.Forms.Label label_to;
         private System.Windows.Forms.Button button_r;
@@ -1100,7 +831,7 @@
         private System.Windows.Forms.Label label_from;
         private System.Windows.Forms.Panel panel_trans_text;
         private System.Windows.Forms.TextBox textBox_trans;
-        private System.Windows.Forms.TextBox textBox_ao;
+        public System.Windows.Forms.TextBox textBox_ao;
         private System.Windows.Forms.Button button_translate;
         private System.Windows.Forms.Timer timer_translate_wait;
         private System.Windows.Forms.Button button_speak_to;
@@ -1109,25 +840,7 @@
         private System.Windows.Forms.Panel panel_word;
         private System.Windows.Forms.Button button_prev_word;
         private System.Windows.Forms.Button button_next_word;
-        private System.Windows.Forms.Panel panel_edt;
-        private System.Windows.Forms.Panel panel_edt_buttons;
-        private System.Windows.Forms.Button button_ok;
-        private System.Windows.Forms.Button button_cancle;
-        private System.Windows.Forms.Panel panel_edt_rus;
-        private System.Windows.Forms.TextBox textBox_edt_rus;
-        private System.Windows.Forms.Label label_edt_rus;
-        private System.Windows.Forms.Panel panel_edt_eng;
-        private System.Windows.Forms.TextBox textBox_edt_eng;
-        private System.Windows.Forms.Label label_edt_eng;
-        private System.Windows.Forms.Panel panel_edt_step;
-        private System.Windows.Forms.TextBox textBox_edt_step;
-        private System.Windows.Forms.Label label_edt_step;
-        private System.Windows.Forms.Panel panel_edt_time;
-        private System.Windows.Forms.TextBox textBox_edt_time;
-        private System.Windows.Forms.Label label_edt_time;
-        private System.Windows.Forms.Label label_edt;
         public System.Windows.Forms.ImageList imageList_icons16;
-        private System.Windows.Forms.Timer timer_edt_translate;
         private System.Windows.Forms.Button button_test;
         private System.Windows.Forms.DataGridViewButtonColumn Learn;
         private System.Windows.Forms.DataGridViewTextBoxColumn T_Left;
