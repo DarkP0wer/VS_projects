@@ -189,9 +189,15 @@ namespace English
                 var timeLeft = words[i].TimeToRemember - Config.GetUnixTime();
                 var row = dataGridView_DB.Rows[i];
                 var row_CS = row.DefaultCellStyle;
+                var s_eng = row.Cells["ENG"].Value;
+                var s_rus = row.Cells["RUS"].Value;
 
                 row_CS.ForeColor = Color.Black;
                 row.Cells["T_Left"].Value = Config.GetStringTime(timeLeft);
+                row.Cells["ENG"].Value = row.Cells["ENG"].Value+" ";
+                row.Cells["RUS"].Value = row.Cells["RUS"].Value+" ";
+                row.Cells["ENG"].Value = s_eng;
+                row.Cells["RUS"].Value = s_rus;
 
                 if (timeLeft <= (int)Config.TimeInSeconds.Now)
                 {
@@ -234,7 +240,7 @@ namespace English
                 end_row.Cells["RUS"].Value = words[i].Rus;
                 end_row.Cells["T_Left"].Value = Config.GetStringTime(timeLeft);
                 end_row.Cells["Learn"].Value = "Can't";
-                end_row.Cells["Example"].Value = "Link";
+                end_row.Cells["E_G"].Value = "Link";
                 end_row.Cells["Time"].Value = words[i].TimeToRemember;
                 end_row.Cells["Step"].Value = words[i].Step;
                 Repaint_Word(i);
@@ -479,7 +485,7 @@ namespace English
         {
             var less_count =  Config.countRowsForRetime < dataGridView_DB.Rows.Count ? Config.countRowsForRetime : dataGridView_DB.Rows.Count;
 
-            for (var i = 0; i < less_count; i++)
+            for (var i = 0; i < dataGridView_DB.Rows.Count; i++)
             {
                 Repaint_Word(i);
             }
@@ -519,7 +525,7 @@ namespace English
                 
             }
             #endregion
-            #region Example link
+            #region E. G. link
             else if (senderGrid.Columns[e.ColumnIndex] is DataGridViewLinkColumn &&
                 e.RowIndex >= 0)
             {
