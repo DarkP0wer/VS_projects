@@ -82,7 +82,7 @@
             this.Controls.Add(this.textBox_dc);
             this.Controls.Add(this.textBox_ab);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "BigInt Multiplication";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
