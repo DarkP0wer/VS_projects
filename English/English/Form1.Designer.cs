@@ -28,15 +28,22 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.timer_repaint = new System.Windows.Forms.Timer(this.components);
             this.panel_main = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage_word_book = new System.Windows.Forms.TabPage();
             this.dataGridView_DB = new System.Windows.Forms.DataGridView();
+            this.Learn = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.T_Left = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ENG = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.RUS = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.E_G = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Step = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel_edit_menu = new System.Windows.Forms.Panel();
             this.button_test = new System.Windows.Forms.Button();
             this.button_word_add = new System.Windows.Forms.Button();
@@ -62,19 +69,14 @@
             this.comboBox_from = new System.Windows.Forms.ComboBox();
             this.label_from = new System.Windows.Forms.Label();
             this.textBox_text = new System.Windows.Forms.TextBox();
+            this.panel_system = new System.Windows.Forms.Panel();
+            this.button_hide = new System.Windows.Forms.Button();
             this.button_exit = new System.Windows.Forms.Button();
             this.button_show = new System.Windows.Forms.Button();
             this.timer_retime = new System.Windows.Forms.Timer(this.components);
             this.timer_translate_wait = new System.Windows.Forms.Timer(this.components);
             this.imageList_mouse = new System.Windows.Forms.ImageList(this.components);
             this.imageList_icons16 = new System.Windows.Forms.ImageList(this.components);
-            this.Learn = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.T_Left = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ENG = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.RUS = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.E_G = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Step = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel_main.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage_word_book.SuspendLayout();
@@ -84,6 +86,7 @@
             this.tabPage_google_translate.SuspendLayout();
             this.panel_trans_text.SuspendLayout();
             this.panel_translate.SuspendLayout();
+            this.panel_system.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer_repaint
@@ -95,7 +98,7 @@
             // panel_main
             // 
             this.panel_main.Controls.Add(this.tabControl1);
-            this.panel_main.Controls.Add(this.button_exit);
+            this.panel_main.Controls.Add(this.panel_system);
             this.panel_main.Cursor = System.Windows.Forms.Cursors.SizeAll;
             this.panel_main.Location = new System.Drawing.Point(0, 0);
             this.panel_main.Margin = new System.Windows.Forms.Padding(0);
@@ -189,6 +192,85 @@
             this.dataGridView_DB.TabStop = false;
             this.dataGridView_DB.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_DB_CellContentClick);
             this.dataGridView_DB.Click += new System.EventHandler(this.dataGridView_DB_Click);
+            // 
+            // Learn
+            // 
+            this.Learn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Learn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Learn.HeaderText = "Learn";
+            this.Learn.Name = "Learn";
+            this.Learn.ReadOnly = true;
+            this.Learn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Learn.Width = 48;
+            // 
+            // T_Left
+            // 
+            this.T_Left.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.T_Left.HeaderText = "T_Left";
+            this.T_Left.Name = "T_Left";
+            this.T_Left.ReadOnly = true;
+            this.T_Left.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.T_Left.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.T_Left.Width = 51;
+            // 
+            // ENG
+            // 
+            this.ENG.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.DarkViolet;
+            this.ENG.DefaultCellStyle = dataGridViewCellStyle2;
+            this.ENG.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ENG.HeaderText = "ENG";
+            this.ENG.Name = "ENG";
+            this.ENG.ReadOnly = true;
+            this.ENG.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.ENG.ToolTipText = "♫";
+            this.ENG.Width = 43;
+            // 
+            // RUS
+            // 
+            this.RUS.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Aqua;
+            this.RUS.DefaultCellStyle = dataGridViewCellStyle3;
+            this.RUS.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.RUS.HeaderText = "RUS";
+            this.RUS.Name = "RUS";
+            this.RUS.ReadOnly = true;
+            this.RUS.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.RUS.ToolTipText = "♫";
+            this.RUS.Width = 43;
+            // 
+            // E_G
+            // 
+            this.E_G.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.E_G.HeaderText = "E_G";
+            this.E_G.Name = "E_G";
+            this.E_G.ReadOnly = true;
+            this.E_G.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.E_G.Width = 40;
+            // 
+            // Time
+            // 
+            this.Time.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Time.HeaderText = "Time";
+            this.Time.Name = "Time";
+            this.Time.ReadOnly = true;
+            this.Time.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Time.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Time.Width = 45;
+            // 
+            // Step
+            // 
+            this.Step.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            this.Step.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Step.HeaderText = "Step";
+            this.Step.Name = "Step";
+            this.Step.ReadOnly = true;
+            this.Step.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Step.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Step.Width = 42;
             // 
             // panel_edit_menu
             // 
@@ -612,22 +694,52 @@
             this.textBox_text.TabIndex = 0;
             this.textBox_text.TextChanged += new System.EventHandler(this.textBox_text_TextChanged);
             // 
+            // panel_system
+            // 
+            this.panel_system.BackColor = System.Drawing.Color.Black;
+            this.panel_system.Controls.Add(this.button_hide);
+            this.panel_system.Controls.Add(this.button_exit);
+            this.panel_system.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel_system.Location = new System.Drawing.Point(0, 0);
+            this.panel_system.Name = "panel_system";
+            this.panel_system.Size = new System.Drawing.Size(800, 30);
+            this.panel_system.TabIndex = 7;
+            this.panel_system.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel_main_MouseDown);
+            // 
+            // button_hide
+            // 
+            this.button_hide.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button_hide.Dock = System.Windows.Forms.DockStyle.Right;
+            this.button_hide.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_hide.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button_hide.ForeColor = System.Drawing.Color.Gray;
+            this.button_hide.Location = new System.Drawing.Point(658, 0);
+            this.button_hide.Name = "button_hide";
+            this.button_hide.Size = new System.Drawing.Size(71, 30);
+            this.button_hide.TabIndex = 7;
+            this.button_hide.TabStop = false;
+            this.button_hide.Text = "--";
+            this.button_hide.UseVisualStyleBackColor = true;
+            this.button_hide.Click += new System.EventHandler(this.button_hide_Click);
+            this.button_hide.MouseEnter += new System.EventHandler(this.button_exit_MouseEnter);
+            this.button_hide.MouseLeave += new System.EventHandler(this.button_exit_MouseLeave);
+            // 
             // button_exit
             // 
             this.button_exit.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button_exit.Dock = System.Windows.Forms.DockStyle.Top;
+            this.button_exit.Dock = System.Windows.Forms.DockStyle.Right;
             this.button_exit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_exit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button_exit.ForeColor = System.Drawing.Color.Red;
-            this.button_exit.Location = new System.Drawing.Point(0, 0);
+            this.button_exit.Location = new System.Drawing.Point(729, 0);
             this.button_exit.Name = "button_exit";
-            this.button_exit.Size = new System.Drawing.Size(800, 30);
+            this.button_exit.Size = new System.Drawing.Size(71, 30);
             this.button_exit.TabIndex = 6;
             this.button_exit.TabStop = false;
             this.button_exit.Text = "X";
             this.button_exit.UseVisualStyleBackColor = true;
+            this.button_exit.Click += new System.EventHandler(this.button_exit_Click);
             this.button_exit.Paint += new System.Windows.Forms.PaintEventHandler(this.button_exit_Paint);
-            this.button_exit.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_exit_MouseDown);
             this.button_exit.MouseEnter += new System.EventHandler(this.button_exit_MouseEnter);
             this.button_exit.MouseLeave += new System.EventHandler(this.button_exit_MouseLeave);
             this.button_exit.MouseMove += new System.Windows.Forms.MouseEventHandler(this.button_exit_MouseMove);
@@ -679,85 +791,6 @@
             this.imageList_icons16.Images.SetKeyName(3, "ok_enabled.ico");
             this.imageList_icons16.Images.SetKeyName(4, "ok_disabled.ico");
             // 
-            // Learn
-            // 
-            this.Learn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Learn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Learn.HeaderText = "Learn";
-            this.Learn.Name = "Learn";
-            this.Learn.ReadOnly = true;
-            this.Learn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Learn.Width = 48;
-            // 
-            // T_Left
-            // 
-            this.T_Left.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.T_Left.HeaderText = "T_Left";
-            this.T_Left.Name = "T_Left";
-            this.T_Left.ReadOnly = true;
-            this.T_Left.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.T_Left.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.T_Left.Width = 51;
-            // 
-            // ENG
-            // 
-            this.ENG.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.DarkViolet;
-            this.ENG.DefaultCellStyle = dataGridViewCellStyle2;
-            this.ENG.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ENG.HeaderText = "ENG";
-            this.ENG.Name = "ENG";
-            this.ENG.ReadOnly = true;
-            this.ENG.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.ENG.ToolTipText = "♫";
-            this.ENG.Width = 43;
-            // 
-            // RUS
-            // 
-            this.RUS.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Aqua;
-            this.RUS.DefaultCellStyle = dataGridViewCellStyle3;
-            this.RUS.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.RUS.HeaderText = "RUS";
-            this.RUS.Name = "RUS";
-            this.RUS.ReadOnly = true;
-            this.RUS.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.RUS.ToolTipText = "♫";
-            this.RUS.Width = 43;
-            // 
-            // E_G
-            // 
-            this.E_G.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.E_G.HeaderText = "E_G";
-            this.E_G.Name = "E_G";
-            this.E_G.ReadOnly = true;
-            this.E_G.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.E_G.Width = 40;
-            // 
-            // Time
-            // 
-            this.Time.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Time.HeaderText = "Time";
-            this.Time.Name = "Time";
-            this.Time.ReadOnly = true;
-            this.Time.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Time.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Time.Width = 45;
-            // 
-            // Step
-            // 
-            this.Step.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
-            this.Step.DefaultCellStyle = dataGridViewCellStyle4;
-            this.Step.HeaderText = "Step";
-            this.Step.Name = "Step";
-            this.Step.ReadOnly = true;
-            this.Step.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Step.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Step.Width = 42;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -796,6 +829,7 @@
             this.panel_trans_text.PerformLayout();
             this.panel_translate.ResumeLayout(false);
             this.panel_translate.PerformLayout();
+            this.panel_system.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -844,7 +878,9 @@
         private System.Windows.Forms.DataGridViewLinkColumn E_G;
         private System.Windows.Forms.DataGridViewTextBoxColumn Time;
         private System.Windows.Forms.DataGridViewTextBoxColumn Step;
-        public System.ComponentModel.IContainer components;
+        private System.Windows.Forms.Panel panel_system;
+        private System.Windows.Forms.Button button_hide;
+        private System.ComponentModel.IContainer components;
     }
 }
 

@@ -194,7 +194,9 @@ namespace English
 
                 label_lrn_eng.Text = $"Print: \"{button_lrn_eng.Text}\"";
 
-
+                button_lrn_eng.Font = new System.Drawing.Font(button_lrn_eng.Font.FontFamily, (float)(-0.1 * button_lrn_eng.Text.Length + 18));
+                button_lrn_rus.Font = new System.Drawing.Font(button_lrn_rus.Font.FontFamily, (float)(-0.1 * button_lrn_rus.Text.Length + 18));
+                label_lrn_eng.Font = new System.Drawing.Font(label_lrn_eng.Font.FontFamily, (float)(-0.1 * label_lrn_eng.Text.Length + 17.6));
                 new System.Threading.Thread(() => form.GetImage(button_lrn_eng.Text, pictureBox_lrn)).Start();
             }
             catch

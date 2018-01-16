@@ -21,7 +21,7 @@ namespace English
 
         int flag_IsLeft = -1;
         Random rand;
-        Point cursor_exit = new Point(0, 0);
+        //Point cursor_exit = new Point(0, 0);
         Form_Panel_Learn panel_Learn;
         Form_Panel_Edit panel_Edit;
 
@@ -348,14 +348,16 @@ namespace English
 
         private void button_exit_MouseEnter(object sender, EventArgs e)
         {
-            this.button_exit.FlatStyle = FlatStyle.Standard;
-            this.button_exit.BackColor = Color.Black;
+            var bt = sender as Button;
+            bt.FlatStyle = FlatStyle.Standard;
+            bt.BackColor = Color.Black;
         }
 
 
         private void button_exit_MouseLeave(object sender, EventArgs e)
         {
-            this.button_exit.FlatStyle = FlatStyle.Flat;
+            var bt = sender as Button;
+            bt.FlatStyle = FlatStyle.Flat;
         }
 
 
@@ -615,7 +617,7 @@ namespace English
 
         private void button_exit_Paint(object sender, PaintEventArgs e)
         {
-            var bt = (Button)sender;
+           /* var bt = (Button)sender;
             var x_close = 40;
             var gr = e.Graphics;
             if (bt.FlatStyle == FlatStyle.Standard)
@@ -632,21 +634,13 @@ namespace English
                 gr.DrawString("HIDE", new Font(bt.Font, FontStyle.Bold), new SolidBrush(Color.Lime), new Point(x_close, bt.Height / 3));
                 gr.DrawString("CLOSE", new Font(bt.Font, FontStyle.Bold), new SolidBrush(Color.Red), new Point(bt.Width - x_close - 20, bt.Height / 3));
                 gr.DrawImage(imageList_mouse.Images[0], new Point(bt.Width - x_close - 40, bt.Height / 3 - 5));   
-            }
+            }*/
         }
 
         
         private void button_exit_MouseMove(object sender, MouseEventArgs e)
         {
-            cursor_exit = e.Location;
-        }
-
-
-        private void button_exit_MouseDown(object sender, MouseEventArgs e)
-        {
-            if(e.Button == MouseButtons.Right)
-                this.Close();
-            else this.panel_main.Visible = false;
+            //cursor_exit = e.Location;
         }
 
 
@@ -844,6 +838,16 @@ namespace English
                 gb = null;
             }
             ));
+        }
+
+        private void button_exit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void button_hide_Click(object sender, EventArgs e)
+        {
+           this.panel_main.Visible = false;
         }
     }
 }
