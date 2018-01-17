@@ -880,7 +880,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Step;
         private System.Windows.Forms.Panel panel_system;
         private System.Windows.Forms.Button button_hide;
-        private System.ComponentModel.IContainer components;
+        public System.ComponentModel.IContainer components;
     }
 }
 

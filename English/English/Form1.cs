@@ -666,6 +666,29 @@ namespace English
         private void button_prev_word_Click(object sender, EventArgs e)
         {
             GoToWord(-1);
+            //var str = "";
+
+            //var newWords = words.GroupBy(w => w.Step)
+            //                    .Select(grp => grp.First())
+            //                    .ToList();
+            //var groupStep = from w in newWords
+            //                select new
+            //                {
+            //                    w.Step,
+            //                    ENG = from w2 in words
+            //                          orderby w2.Step
+            //                          where w.Step == w2.Step
+            //                          select w2
+            //                };
+            //foreach(var wGroup in groupStep)
+            //{
+            //    str += $"{wGroup.Step}\r\n";
+            //    foreach(var w in wGroup.ENG)
+            //    {
+            //        str += $"* {w.Eng} ({w.Step})\r\n";
+            //    }
+            //}
+            //this.textBox_trans.Text = str;    
         }
 
 
@@ -730,6 +753,7 @@ namespace English
                 gb.Text = selected_eng_words[i].Eng;
                 gb.Dock = DockStyle.Top;
                 gb.ForeColor = Color.Magenta;
+                gb.AutoSize = true;
                 gb.Font = new Font(testForm.Font.FontFamily, 16, FontStyle.Bold);
 
                 rnd = rand.Next() % 4;
@@ -751,7 +775,7 @@ namespace English
                         rb.Font = new Font(testForm.Font.FontFamily, 10);
                         rb.AutoSize = true;
                         rb.Parent = gb;
-                        rb.Dock = DockStyle.Left;
+                        rb.Dock = DockStyle.Top;
                         rb.ForeColor = Color.White;
                         rb.Cursor = Cursors.Hand;
                         rb.CheckedChanged += new System.EventHandler(this.radioButton_checkChanged);
@@ -770,6 +794,7 @@ namespace English
                 gb.Parent = testForm;
                 gb.Text = selected_rus_words[i].Rus;
                 gb.Dock = DockStyle.Top;
+                gb.AutoSize = true;
                 gb.ForeColor = Color.Magenta;
                 gb.Font = new Font(testForm.Font.FontFamily, 16, FontStyle.Bold);
 
@@ -792,7 +817,7 @@ namespace English
                         rb.Font = new Font(testForm.Font.FontFamily, 10);
                         rb.AutoSize = true;
                         rb.Parent = gb;
-                        rb.Dock = DockStyle.Left;
+                        rb.Dock = DockStyle.Top;
                         rb.Cursor = Cursors.Hand;
                         rb.ForeColor = Color.White;
                         rb.CheckedChanged += new System.EventHandler(this.radioButton_r_checkChanged);
