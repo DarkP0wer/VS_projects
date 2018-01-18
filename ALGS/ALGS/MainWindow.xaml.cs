@@ -27,9 +27,11 @@ namespace ALGS
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var a = Convert.ToInt32(this.textBox_a.Text);
-            var b = Convert.ToInt32(this.textBox_b.Text);
-            var res = Euclid.NOD(a, b);
+            int a = Int32.TryParse(this.textBox_a.Text, out a) ? a : -1;
+            int b = Int32.TryParse(this.textBox_b.Text, out b) ? b : -1;
+            //var res = Euclid.ExtendedNOD(a, b);
+            //Euclid.NOD(a, b);
+            var res = Primality.WithKarmicleNumbers(a);
 
             this.textBlock_res.Text = res.ToString();
         }

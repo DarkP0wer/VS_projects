@@ -32,24 +32,6 @@ namespace Wpf_Tranning_1
             listBox_res.ItemsSource = imgs;
         }
 
-        private void Button_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            try
-            {
-                this.DragMove();
-            }
-            catch { }
-        }
-
-        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            try
-            {
-                this.DragMove();
-            }
-            catch { }
-        }
-
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             try

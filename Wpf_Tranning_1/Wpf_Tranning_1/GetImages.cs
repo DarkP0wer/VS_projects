@@ -21,11 +21,11 @@ namespace Wpf_Tranning_1
         }
 
 
-        public static List<SomeClass> FromDir(string dir)
+        public static List<Img> FromDir(string dir)
         {
-            var res = new List<SomeClass>();
+            var res = new List<Img>();
 
-            foreach (string s1 in Directory.GetFiles(dir))
+            foreach (string s1 in Directory.GetFiles(dir, "*.??g"))
             {
                 try
                 {
@@ -35,7 +35,7 @@ namespace Wpf_Tranning_1
                         continue;
 
 
-                    res.Add(new SomeClass(Path.GetFileName(s1).Replace(extension, ""), s1, new BitmapImage(new Uri(s1))));
+                    res.Add(new Img(Path.GetFileName(s1).Replace(extension, ""), s1, new BitmapImage(new Uri(s1))));
                 }
                 catch { }
             }

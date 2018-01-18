@@ -5,112 +5,145 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wpf_Tranning_1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" WindowStyle="None" MouseDown="Window_MouseDown">
+        Title="MainWindow" Height="400" Width="525" WindowStyle="ToolWindow" MouseDown="Window_MouseDown">
     <Window.Resources>
         <Style x:Key="{x:Type Button}">
             <Setter Property="Control.FontSize" Value="18"/>
             <Setter Property="Control.Background" Value="Azure"/>
-
-        </Style>
-        <Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width="14*"/>
-                            </Grid.ColumnDefinitions>
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup x:Name="CommonStates">
-                                    <VisualState x:Name="Normal"/>
-                                    <VisualState x:Name="MouseOver">
-                                        <Storyboard>
-                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="rectangle">
-                                                <EasingColorKeyFrame KeyTime="0" Value="Black"/>
-                                            </ColorAnimationUsingKeyFrames>
-                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="rectangle1">
-                                                <EasingColorKeyFrame KeyTime="0" Value="Red"/>
-                                            </ColorAnimationUsingKeyFrames>
-                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="rectangle2">
-                                                <EasingColorKeyFrame KeyTime="0" Value="Red"/>
-                                            </ColorAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="Pressed">
-                                        <Storyboard>
-                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="rectangle2">
-                                                <EasingDoubleKeyFrame KeyTime="0" Value="0.455"/>
-                                            </DoubleAnimationUsingKeyFrames>
-                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="rectangle2">
-                                                <EasingDoubleKeyFrame KeyTime="0" Value="-20.043"/>
-                                            </DoubleAnimationUsingKeyFrames>
-                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="rectangle2">
-                                                <EasingDoubleKeyFrame KeyTime="0" Value="55.745"/>
-                                            </DoubleAnimationUsingKeyFrames>
-                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="rectangle1">
-                                                <EasingDoubleKeyFrame KeyTime="0" Value="-11.054"/>
-                                            </DoubleAnimationUsingKeyFrames>
-                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="rectangle1">
-                                                <EasingDoubleKeyFrame KeyTime="0" Value="1.716"/>
-                                            </DoubleAnimationUsingKeyFrames>
-                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[1].(SkewTransform.AngleY)" Storyboard.TargetName="rectangle1">
-                                                <EasingDoubleKeyFrame KeyTime="0" Value="1.039"/>
-                                            </DoubleAnimationUsingKeyFrames>
-                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="rectangle1">
-                                                <EasingDoubleKeyFrame KeyTime="0" Value="0.52"/>
-                                            </DoubleAnimationUsingKeyFrames>
-                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="rectangle1">
-                                                <EasingDoubleKeyFrame KeyTime="0" Value="0.508"/>
-                                            </DoubleAnimationUsingKeyFrames>
-                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="rectangle2">
-                                                <EasingDoubleKeyFrame KeyTime="0" Value="0.587"/>
-                                            </DoubleAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="Disabled"/>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                            <Rectangle x:Name="rectangle" Fill="#FFF4F4F5" Stroke="Black" Margin="-23,0,23,0" Grid.ColumnSpan="2"/>
-                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="209.376,91.04,35,10" RenderTransformOrigin="-0.095,0.373" Grid.Column="1"/>
-                            <Rectangle x:Name="rectangle1" Fill="Black" HorizontalAlignment="Left" Height="35.52" Margin="59,42,0,0" Stroke="Black" VerticalAlignment="Top" Width="109" RenderTransformOrigin="0.5,0.5" Grid.Column="1">
-                                <Rectangle.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform/>
-                                        <SkewTransform/>
-                                        <RotateTransform Angle="50.553"/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </Rectangle.RenderTransform>
-                            </Rectangle>
-                            <Rectangle x:Name="rectangle2" Fill="Black" HorizontalAlignment="Left" Height="33.48" Margin="46,41,0,0" Stroke="Black" VerticalAlignment="Top" Width="138" RenderTransformOrigin="0.593,-0.433" Grid.Column="1">
-                                <Rectangle.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform/>
-                                        <SkewTransform/>
-                                        <RotateTransform Angle="140.369"/>
-                                        <TranslateTransform X="-2.792" Y="63.476"/>
-                                    </TransformGroup>
-                                </Rectangle.RenderTransform>
-                            </Rectangle>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsFocused" Value="True"/>
-                            <Trigger Property="IsDefaulted" Value="True"/>
-                            <Trigger Property="IsMouseOver" Value="True"/>
-                            <Trigger Property="IsPressed" Value="True"/>
-                            <Trigger Property="IsEnabled" Value="False"/>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
         </Style>
     </Window.Resources>
-    <Grid MouseDown="Grid_MouseDown" Margin="0,47,0,0">
-        <Button x:Name="button_load" Content="Button" HorizontalAlignment="Left" Margin="23,28,0,0" VerticalAlignment="Top" Width="75" Click="button_load_Click"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="23,63,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="23,98,0,0" VerticalAlignment="Top" Width="75"/>
-        <ListBox x:Name="listBox_res" HorizontalAlignment="Left" Height="300" Margin="103,10,0,0" VerticalAlignment="Top" Width="404">
+    
+    <Grid Background="Red" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="105*"/>
+            <ColumnDefinition Width="228*"/>
+            <ColumnDefinition Width="184*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+        <TabControl Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="3">
+
+            <TabItem Header="Flow Reader" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="78">
+                <Grid Background="#FFE5E5E5">
+
+                    <!-- ViewingMode : Page, Scroll, TwoPage -->
+                    <FlowDocumentReader ViewingMode="Page" IsFindEnabled="True" IsPageViewEnabled="True" IsScrollViewEnabled="True" IsTwoPageViewEnabled="True">
+                        <FlowDocument>
+
+                            <Paragraph>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            </Paragraph>
+                            <List>
+                                <ListItem>
+                                    <Paragraph>Item 1</Paragraph>
+                                </ListItem>
+                                <ListItem>
+                                    <Paragraph>Item 2</Paragraph>
+                                </ListItem>
+                            </List>
+                            <BlockUIContainer>
+                                <StackPanel>
+
+                                    <Label Foreground="Blue">Favorite Phone :</Label>
+                                    <ComboBox>
+                                        <ComboBoxItem IsSelected="True">Android</ComboBoxItem>
+                                        <ComboBoxItem>Apple</ComboBoxItem>
+                                        <ComboBoxItem>Black Berry</ComboBoxItem>
+                                    </ComboBox>
+                                    <Label Foreground ="Red">Favorite Color:</Label>
+                                    <StackPanel>
+                                        <RadioButton>Red</RadioButton>
+                                        <RadioButton>Green</RadioButton>
+                                        <RadioButton>Blue</RadioButton>
+                                    </StackPanel>
+                                    <Label>Your Name:</Label>
+                                    <TextBox>
+                                        Name
+                                    </TextBox>
+                                </StackPanel>
+                            </BlockUIContainer>
+
+                            <!-- Put here to make an empty line -->
+                            <Paragraph></Paragraph>
+
+                            <Table>
+                                <Table.Columns>
+                                    <TableColumn />
+                                    <TableColumn />
+                                    <TableColumn />
+                                </Table.Columns>
+                                <TableRowGroup>
+                                    <TableRow>
+                                        <TableCell ColumnSpan="3" Background="Blue" Foreground="AliceBlue">
+                                            <Paragraph Padding="10">Best Baseball Players</Paragraph>
+                                        </TableCell>
+                                    </TableRow>
+                                    <TableRow>
+                                        <TableCell Background="White">
+                                            <Paragraph>Name</Paragraph>
+                                        </TableCell>
+                                        <TableCell Background="White">
+                                            <Paragraph>Average</Paragraph>
+                                        </TableCell>
+                                        <TableCell Background="White">
+                                            <Paragraph>HRs</Paragraph>
+                                        </TableCell>
+                                    </TableRow>
+                                </TableRowGroup>
+                            </Table>
+
+                        </FlowDocument>
+                    </FlowDocumentReader>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Scroll" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="54">
+            <Grid Background="#FFE5E5E5">
+
+                <FlowDocumentScrollViewer>
+                    <FlowDocument>
+                        <Paragraph>
+                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur
+                        </Paragraph>
+                    </FlowDocument>
+                </FlowDocumentScrollViewer>
+
+            </Grid>
+        </TabItem>
+        <TabItem Header="Generate" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="64">
+            <Grid Background="#FFE5E5E5">
+
+                <FlowDocumentScrollViewer Name="fdScrollViewer" />
+
+            </Grid>
+        </TabItem>
+        <TabItem Header="Rich" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="54">
+            <!-- You place a FlowDocument in a RichTextBox
+                and it can be edited. You can add spell
+                checking and a menu for cut, copy and paste -->
+
+            <StackPanel>
+
+                    <RichTextBox Name="RichTB" Height="200" SpellCheck.IsEnabled="True"><!--ContextMenuOpening="RichTB_ContextMenuOpening"-->
+                        <FlowDocument>
+                        <Paragraph>
+                            You can edit me
+                        </Paragraph>
+                    </FlowDocument>
+                </RichTextBox>
+                <!--<Button Click="SaveRTBContent">Save</Button>
+                <Button Click="LoadRTBContent">Open</Button>-->
+            </StackPanel>
+        </TabItem>
+        </TabControl>
+        <Button Grid.Column="0" Grid.Row="0" x:Name="button_load" Height="Auto" DockPanel.Dock="Top" Content="Button" Click="button_load_Click"/>
+            <Button Grid.Column="0" Grid.Row="1" Content="Button" Height="Auto" DockPanel.Dock="Top"/>
+            <Button Grid.Column="0" Grid.Row="2" Content="Button" Height="Auto" DockPanel.Dock="Top"/>
+        <ListBox Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="3"  x:Name="listBox_res" HorizontalAlignment="Stretch">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid HorizontalAlignment="Stretch">
@@ -132,7 +165,5 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Button Content="Button" HorizontalAlignment="Left" Height="117" Margin="23,193,0,0" Style="{DynamicResource ButtonStyle1}" VerticalAlignment="Top" Width="300" MouseDown="Button_MouseDown"/>
-        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="42" Margin="144,-74,0,0" Stroke="Black" VerticalAlignment="Top" Width="363" RenderTransformOrigin="-0.618,0.119"/>
     </Grid>
 </Window>
