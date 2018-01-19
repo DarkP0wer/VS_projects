@@ -25,7 +25,7 @@ namespace ASP_tut_1
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             //app.UseMiddleware<TokenMiddleware>();
-            app.UseToken("555");
+            app.UseToken("331337");
 
 
 
