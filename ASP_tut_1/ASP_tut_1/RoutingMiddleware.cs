@@ -20,6 +20,7 @@ namespace ASP_tut_1
         public async Task InvokeAsync(HttpContext context)
         {
             string path = context.Request.Path.Value;
+            
         }
     }
 }

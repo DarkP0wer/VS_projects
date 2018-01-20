@@ -26,7 +26,6 @@ namespace ASP_tut_1
             if (token != _pattern)
             {
                 context.Response.StatusCode = 403;
-                await context.Response.WriteAsync("Token is invalid");
             }
             else
                 await _next(context);
