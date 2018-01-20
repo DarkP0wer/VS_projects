@@ -26,7 +26,7 @@ namespace ASP_tut_1
         {
             app.UseMiddleware<ErrorHandlingMiddleware>();
             //app.UseMiddleware<TokenMiddleware>();
-            app.UseToken("555");
+            app.UseToken("331337");
 
 
 
