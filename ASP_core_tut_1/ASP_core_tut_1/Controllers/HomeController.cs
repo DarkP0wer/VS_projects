@@ -23,5 +23,22 @@ namespace ASP_core_tut_1.Controllers
         {
             return View(db.Phones.ToList());
         }
+
+
+        [HttpGet]
+        public IActionResult Buy(int id)
+        {
+            ViewBag.PhoneId = id;
+            return View();
+        }
+
+
+        [HttpPost]
+        public string Buy(Order order)
+        {
+            db.Oreders.Add(order);
+            db.SaveChanges();
+            return $"Спасибо {order.User}, за покупку!";
+        }
     }
 }
