@@ -34,11 +34,13 @@ namespace ASP_core_tut_1.Controllers
 
 
         [HttpPost]
-        public string Buy(Order order)
+        public IActionResult Buy(Order order)
         {
             db.Oreders.Add(order);
             db.SaveChanges();
-            return $"Спасибо {order.User}, за покупку!";
+
+            order.Phone = db.Phones.ToList().Where(p => p.Id == order.Phone.Id).First();
+            return View("Order", order);
         }
     }
 }
