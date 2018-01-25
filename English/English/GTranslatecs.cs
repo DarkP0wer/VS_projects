@@ -9,9 +9,20 @@ namespace English
         public static string[] voice_url = new string[2];
         static WindowsMediaPlayer player = new WindowsMediaPlayer();
 
+
         public static void Speak(bool is_from)
         {
             player.URL = voice_url[Convert.ToInt32(!is_from)];
+            player.controls.play();
+        }
+
+
+        public static void Speak(string text, string lenguage = "en")
+        {
+            var tk = GoogleTranslate.TL(text);
+            var site = string.Format(Config.g_domain + "_tts?ie=UTF-8&q={0}&tl={1}&tk={2}&client=webapp", Uri.EscapeDataString(text), lenguage, tk);
+
+            player.URL = site;
             player.controls.play();
         }
 

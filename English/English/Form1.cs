@@ -15,7 +15,6 @@ namespace English
 {
     public partial class Form1 : Form
     {
-        public WindowsMediaPlayer player = new WindowsMediaPlayer();
         public List<string> images_base64 = new List<string>();
         public List<Words> words = null;
 
@@ -516,11 +515,7 @@ namespace English
                 else
                 {
                     var text = senderGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-                    var tk = GoogleTranslate.TL(text);
-                    var site = string.Format(Config.g_domain + "_tts?ie=UTF-8&q={0}&tl={1}&tk={2}&client=webapp", Uri.EscapeDataString(text), (senderGrid.Columns[e.ColumnIndex].HeaderText == "ENG" ? "en" : "ru"), tk);
-
-                    player.URL = site;
-                    player.controls.play();
+                    GoogleTranslate.Speak(text, (senderGrid.Columns[e.ColumnIndex].HeaderText == "ENG" ? "en" : "ru"));
                 }
 
                 #endregion
@@ -836,7 +831,14 @@ namespace English
             var rb = (RadioButton)sender;
             var gb = rb.Parent;
             gb.BackColor = Color.Red;
-            words.Where(w => w.Eng == gb.Text && w.Rus == rb.Text).ToList().ForEach(f => { f.eng_lrn_count += 1; gb.BackColor = Color.Green; gb.Text += $" ({f.eng_lrn_count})"; });
+            words.Where(w => w.Eng == gb.Text && w.Rus == rb.Text).ToList().ForEach(f => 
+                {
+                    f.eng_lrn_count += 1;
+                    gb.BackColor = Color.Green;
+                    GoogleTranslate.Speak(f.Eng);
+                    gb.Text += $" ({f.eng_lrn_count})";
+                }
+            );
             gb.Enabled = false;
             new Thread(() => HideGroupBox(gb)).Start();
         }
@@ -847,7 +849,14 @@ namespace English
             var rb = (RadioButton)sender;
             var gb = rb.Parent;
             gb.BackColor = Color.Red;
-            words.Where(w => w.Rus == gb.Text && w.Eng == rb.Text).ToList().ForEach(f => { f.rus_lrn_count += 1; gb.BackColor = Color.Green; gb.Text += $" ({f.eng_lrn_count})"; });
+            words.Where(w => w.Rus == gb.Text && w.Eng == rb.Text).ToList().ForEach(f => 
+                {
+                    f.rus_lrn_count += 1;
+                    gb.BackColor = Color.Green;
+                    gb.Text += $" ({f.eng_lrn_count})";
+                    GoogleTranslate.Speak(f.Eng);
+                }
+            );
             gb.Enabled = false;
             new Thread(() => HideGroupBox(gb)).Start();
         }

@@ -237,12 +237,7 @@ namespace English
 
         private void button_lrn_rus_Click(object sender, EventArgs e)
         {
-            var text = button_lrn_rus.Text;
-            var tk = GoogleTranslate.TL(text);
-            var site = string.Format(Config.g_domain + "_tts?ie=UTF-8&q={0}&tl={1}&tk={2}&client=webapp", Uri.EscapeDataString(text), "ru", tk);
-
-            form.player.URL = site;
-            form.player.controls.play();
+            GoogleTranslate.Speak(button_lrn_rus.Text, "ru");
 
             label_lrn_eng.Visible = true;
             textBox_lrn_eng.Visible = true;
@@ -253,12 +248,7 @@ namespace English
 
         private void button_lrn_eng_Click(object sender, EventArgs e)
         {
-            var text = button_lrn_eng.Text;
-            var tk = GoogleTranslate.TL(text);
-            var site = string.Format(Config.g_domain + "_tts?ie=UTF-8&q={0}&tl={1}&tk={2}&client=webapp", Uri.EscapeDataString(text), "en", tk);
-
-            form.player.URL = site;
-            form.player.controls.play();
+            GoogleTranslate.Speak(button_lrn_eng.Text, "en");
 
             button_lrn_rus.Visible = true;
             button_lrn_eng.Image = form.imageList_icons16.Images["ok_enabled.ico"];
@@ -269,12 +259,7 @@ namespace English
         {
             pictureBox_lrn.BackgroundImage = form.Base64ToImage(form.images_base64[DateTime.Now.Second % form.images_base64.Count]);
 
-            var text = button_lrn_eng.Text;
-            var tk = GoogleTranslate.TL(text);
-            var site = string.Format(Config.g_domain + "_tts?ie=UTF-8&q={0}&tl={1}&tk={2}&client=webapp", Uri.EscapeDataString(text), "en", tk);
-
-            form.player.URL = site;
-            form.player.controls.play();
+            GoogleTranslate.Speak(button_lrn_eng.Text, "en");
         }
 
 
