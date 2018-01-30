@@ -4,4 +4,8 @@
 }
 
 <h2>Заказ принят!</h2>
-<p>@Model.User, спасибо за покупку @Model.Phone.Name!</p>
+<p>
+    @Model.User, спасибо за покупку @Model.Phone.Name!
+    <br />
+    @DateTime.Now.ToLongDateString()
+</p>
