@@ -1,5 +1,11 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.IO;
+using System.Net;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using System.Drawing;
+using System.Threading;
 
 namespace English
 {
@@ -15,6 +21,7 @@ namespace English
         private Button button_lrn_cancel;
         private Button button_lrn_eng;
         private PictureBox pictureBox_lrn;
+        public List<string> images_base64 = new List<string>();
 
 
         private void Init()
@@ -174,6 +181,104 @@ namespace English
         }
 
 
+        private List<string> GetUrls(string html)
+        {
+            var urls = new List<string>();
+
+            string search = "eg;base64,(.*?)\"";
+            MatchCollection matches = Regex.Matches(html, search);
+
+            foreach (Match match in matches)
+            {
+                urls.Add(match.Groups[1].Value);
+            }
+
+            return urls;
+        }
+
+
+        public Image Base64ToImage(string base64String)
+        {
+            try
+            {
+                base64String = base64String.Replace("\\u003d", "=");
+                byte[] imageBytes = Convert.FromBase64String(base64String);
+                MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
+                ms.Write(imageBytes, 0, imageBytes.Length);
+                Image image = Image.FromStream(ms, true);
+                return image;
+            }
+            catch (Exception ex)
+            { MessageBox.Show(ex.ToString()); return null; }
+        }
+
+
+        public void GetImage(string text, Control pb)
+        {
+            var domain = "https://www.google.com.ua";
+            var url = $"{domain}/search?q={Uri.EscapeDataString(text)}&tbm=isch";
+            string result = "";
+
+            try
+            {
+                var request = (HttpWebRequest)WebRequest.Create(url);
+                request.Accept = "text/html, application/xhtml+xml, */*";
+                request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko";
+
+                var response = (HttpWebResponse)request.GetResponse();
+
+                using (Stream dataStream = response.GetResponseStream())
+                {
+                    using (var sr = new StreamReader(dataStream))
+                    {
+                        var pos = -1;
+                        do
+                        {
+                            result = sr.ReadLine();
+                            pos = result.IndexOf("eg;base64,");
+                        }
+                        while (pos == -1);
+                        result += sr.ReadLine();
+                        result += sr.ReadLine();
+                        result += sr.ReadLine();
+                        result += sr.ReadLine();
+                        result += sr.ReadLine();
+                        result += sr.ReadLine();
+                        result += sr.ReadLine();
+                        result += sr.ReadLine();
+                        result += sr.ReadLine();
+                        result += sr.ReadLine();
+                        result += sr.ReadLine();
+                        result += sr.ReadLine();
+                        result += sr.ReadLine();
+                        result += sr.ReadLine();
+                        result += sr.ReadLine();
+                        result += sr.ReadLine();
+                    }
+                }
+                var startStr = "eg;base64,";
+                var startPos = result.IndexOf(startStr);
+                //var endPos = -1;
+                images_base64 = GetUrls(result);
+                result = images_base64[0];
+                /*if (startPos > -1 && (endPos = result.IndexOf("\"", startPos + 1)) > -1)
+                    result = result.Substring(startPos + startStr.Length, endPos - startPos - startStr.Length);
+                */
+            }
+            catch (Exception ex) { MessageBox.Show(ex.ToString()); }
+
+            try
+            {
+                /*Invoke(new Action(() =>
+                {*/
+                    //this.textBox_text.Text = result;
+                    pb.BackgroundImage = Base64ToImage(result);
+                /*}));*/
+            }
+            catch { }
+        }
+
+
         public Form_Panel_Learn(Form1 _form)
         {
             this.form = _form;
@@ -194,10 +299,10 @@ namespace English
 
                 label_lrn_eng.Text = $"Print: \"{button_lrn_eng.Text}\"";
 
-                button_lrn_eng.Font = new System.Drawing.Font(button_lrn_eng.Font.FontFamily, (float)(-0.1 * button_lrn_eng.Text.Length + 18));
-                button_lrn_rus.Font = new System.Drawing.Font(button_lrn_rus.Font.FontFamily, (float)(-0.1 * button_lrn_rus.Text.Length + 18));
-                label_lrn_eng.Font = new System.Drawing.Font(label_lrn_eng.Font.FontFamily, (float)(-0.1 * label_lrn_eng.Text.Length + 17.6));
-                new System.Threading.Thread(() => form.GetImage(button_lrn_eng.Text, pictureBox_lrn)).Start();
+                button_lrn_eng.Font = new Font(button_lrn_eng.Font.FontFamily, (float)(-0.1 * button_lrn_eng.Text.Length + 18));
+                button_lrn_rus.Font = new Font(button_lrn_rus.Font.FontFamily, (float)(-0.1 * button_lrn_rus.Text.Length + 18));
+                label_lrn_eng.Font = new Font(label_lrn_eng.Font.FontFamily, (float)(-0.1 * label_lrn_eng.Text.Length + 17.6));
+                new Thread(() => GetImage(button_lrn_eng.Text, pictureBox_lrn)).Start();
             }
             catch
             {
@@ -257,7 +362,7 @@ namespace English
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            pictureBox_lrn.BackgroundImage = form.Base64ToImage(form.images_base64[DateTime.Now.Second % form.images_base64.Count]);
+            pictureBox_lrn.BackgroundImage = Base64ToImage(images_base64[DateTime.Now.Second % images_base64.Count]);
 
             GoogleTranslate.Speak(button_lrn_eng.Text, "en");
         }

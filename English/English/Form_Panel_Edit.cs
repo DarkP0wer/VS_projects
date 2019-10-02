@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace English
@@ -387,7 +388,7 @@ namespace English
             var sl = "en";
             var tl = "ru";
 
-            new System.Threading.Thread(() => form.Translate(q, sl, tl, textBox_edt_rus, false, form.checkBox_ao, form.textBox_ao)).Start();
+            form.TranslateAsync(q, sl, tl, textBox_edt_rus, false, form.checkBox_ao, form.textBox_ao);
             timer_edt_translate.Enabled = false;
         }
 

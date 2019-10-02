@@ -5,12 +5,136 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ALGS"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        <TextBox x:Name="textBox_a" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="497" RenderTransformOrigin="-0.667,-0.522"/>
-        <TextBlock x:Name="textBlock_res" HorizontalAlignment="Left" Margin="10,100,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" RenderTransformOrigin="0.2,4.812" Width="497" Height="23"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top" Width="497" RenderTransformOrigin="0.507,0.5" Height="29" Click="Button_Click"/>
-        <TextBox x:Name="textBox_b" HorizontalAlignment="Left" Height="23" Margin="10,38,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="497" RenderTransformOrigin="-0.667,-0.522"/>
+        Title="MainWindow" Height="600" Width="800">
+    <Window.Resources>
+        <Style x:Key="NumbersOnly">
+            <EventSetter Event="Control.KeyDown" Handler="textBox_NumOnly_KeyDown"/>
+            <!--<Setter Property="Control.FontSize" Value="18"/>-->
+        </Style>
+        <Style x:Key="NumbersOnlySpace">
+            <EventSetter Event="Control.KeyDown" Handler="textBox_NumOnlySpace_KeyDown"/>
+            <!--<Setter Property="Control.FontSize" Value="18"/>-->
+        </Style>
+    </Window.Resources>
+    <TabControl>
+        <TabItem Header="Algoritms" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Width="Auto">
+            <Grid Background="#FFC3C3C3">
+                <FlowDocumentReader ViewingMode="Page" IsFindEnabled="True" IsPageViewEnabled="True" IsScrollViewEnabled="True" IsTwoPageViewEnabled="True">
+                    <FlowDocument>
+                        <Paragraph TextAlignment="Center" FontWeight="Bold">
+                            Euclid
+                        </Paragraph>
+                        <Paragraph>
+                            Euclid algoritm using for calculate greatest commn divisor.
+                            <LineBreak/>
+                            EXAMPLE: 4 &amp;&amp; 8 = 4;
+                        </Paragraph>
+                        <Paragraph TextAlignment="Center">
+                            var A:
+                            <TextBox Style="{StaticResource NumbersOnly}" Name="textBox_Euclid_a" Height="auto" Width="100"></TextBox>
+                            var B:
+                            <TextBox Style="{StaticResource NumbersOnly}" Name="textBox_Euclid_b" Height="auto" Width="100"></TextBox>
+                        </Paragraph>
+                        <Paragraph TextAlignment="Center">
+                            <Button Name="button_Euclid_res" Height="Auto" Width="100" Content="Get Result" Click="button_Euclid_res_Click"/>
+                            <LineBreak/>
+                            <TextBox Style="{StaticResource NumbersOnly}" Name="textBox_Euclid_res" Height="auto" Width="300"></TextBox>
+                        </Paragraph>
+                        
+                        <Paragraph TextAlignment="Center" FontWeight="Bold">
+                            ExtendedEuclid
+                        </Paragraph>
+                        <Paragraph>
+                            Euclid algoritm using for calculate greatest commn divisor.
+                            <LineBreak/>
+                            EXAMPLE: d = ax + by; 4 &amp;&amp; 8 = 4 (x = 1; y = 0;)
+                        </Paragraph>
+                        <Paragraph TextAlignment="Center">
+                            var A:
+                            <TextBox Style="{StaticResource NumbersOnly}" Name="textBox_ExtendedEuclid_a" Height="auto" Width="100"></TextBox>
+                            var B:
+                            <TextBox Style="{StaticResource NumbersOnly}" Name="textBox_ExtendedEuclid_b" Height="auto" Width="100"></TextBox>
+                        </Paragraph>
+                        <Paragraph TextAlignment="Center">
+                            <Button Name="button_ExtendedEuclid_res" Height="Auto" Width="100" Content="Get Result" Click="button_ExtendedEuclid_res_Click"/>
+                            <LineBreak/>
+                            <TextBox Style="{StaticResource NumbersOnly}" Name="textBox_ExtendedEuclid_res" Height="auto" Width="300"></TextBox>
+                        </Paragraph>
+                        
+                        <Paragraph TextAlignment="Center" FontWeight="Bold" BreakPageBefore="True">
+                            Primality
+                        </Paragraph>
+                        <Paragraph>
+                            Primality aloritm using for check is number primality.
+                            <LineBreak/>
+                            EXAMPLE: 7 ? = true;
+                        </Paragraph>
+                        <Paragraph TextAlignment="Center">
+                            var A:
+                            <TextBox Style="{StaticResource NumbersOnly}" Name="textBox_Primality_a" Height="auto" Width="100"></TextBox>
+                        </Paragraph>
+                        <Paragraph TextAlignment="Center">
+                            <Button Name="button_Primality_res" Height="Auto" Width="100" Content="Get Result" Click="button_Primality_res_Click"/>
+                            <LineBreak/>
+                            <TextBox Style="{StaticResource NumbersOnly}" Name="textBox_Primality_res" Height="auto" Width="300"></TextBox>
+                        </Paragraph>
 
-    </Grid>
+                        <Paragraph TextAlignment="Center" FontWeight="Bold">
+                            Primality2
+                        </Paragraph>
+                        <Paragraph>
+                            Algorithm for checking the primality of a number with a low probability of error.
+                            <LineBreak/>
+                            EXAMPLE: 7 ? = true;
+                        </Paragraph>
+                        <Paragraph TextAlignment="Center">
+                            var A:
+                            <TextBox Style="{StaticResource NumbersOnly}" Name="textBox_Primality2_a" Height="auto" Width="100"></TextBox>
+                        </Paragraph>
+                        <Paragraph TextAlignment="Center">
+                            <Button Name="button_Primality2_res" Height="Auto" Width="100" Content="Get Result" Click="button_Primality2_res_Click"/>
+                            <LineBreak/>
+                            <TextBox Style="{StaticResource NumbersOnly}" Name="textBox_Primality2_res" Height="auto" Width="300"></TextBox>
+                        </Paragraph>
+
+                        <Paragraph TextAlignment="Center" FontWeight="Bold" BreakPageBefore="True">
+                            Merge Sort
+                        </Paragraph>
+                        <Paragraph>
+                            Sort numbers
+                            <LineBreak/>
+                            EXAMPLE: (2 0 1 3 6) => (0 1 2 3 6);
+                        </Paragraph>
+                        <Paragraph TextAlignment="Center">
+                            var Array:
+                            <TextBox Style="{StaticResource NumbersOnlySpace}" Name="textBox_MergeSort_a" Height="auto" Width="300"></TextBox>
+                        </Paragraph>
+                        <Paragraph TextAlignment="Center">
+                            <Button Name="button_MergeSort_res" Height="Auto" Width="100" Content="Get Result" Click="button_MergeSort_res_Click"/>
+                            <LineBreak/>
+                            <TextBox Style="{StaticResource NumbersOnlySpace}" Name="textBox_MergeSort_res" Height="auto" Width="300"></TextBox>
+                        </Paragraph>
+                        
+                        <Paragraph TextAlignment="Center" FontWeight="Bold">
+                            Quick Sort
+                        </Paragraph>
+                        <Paragraph>
+                            Sort numbers
+                            <LineBreak/>
+                            EXAMPLE: (2 0 1 3 6) => (0 1 2 3 6);
+                        </Paragraph>
+                        <Paragraph TextAlignment="Center">
+                            var Array:
+                            <TextBox Style="{StaticResource NumbersOnlySpace}" Name="textBox_QuickSort_a" Height="auto" Width="300"></TextBox>
+                        </Paragraph>
+                        <Paragraph TextAlignment="Center">
+                            <Button Name="button_QuickSort_res" Height="Auto" Width="100" Content="Get Result" Click="button_QuickSort_res_Click"/>
+                            <LineBreak/>
+                            <TextBox Style="{StaticResource NumbersOnlySpace}" Name="textBox_QuickSort_res" Height="auto" Width="300"></TextBox>
+                        </Paragraph>
+                    </FlowDocument>
+                </FlowDocumentReader>
+            </Grid>
+        </TabItem>
+    </TabControl>
 </Window>

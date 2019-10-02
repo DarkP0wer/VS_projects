@@ -76,6 +76,12 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Form_Panel_Edit.cs" />
+    <Compile Include="Form_Tab_GTranslate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Test.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="GTranslatecs.cs" />
     <Compile Include="JSON.cs" />
     <Compile Include="Form_Panel_Learn.cs" />

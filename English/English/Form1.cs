@@ -2,20 +2,16 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-using WMPLib;
 
 namespace English
 {
     public partial class Form1 : Form
     {
-        public List<string> images_base64 = new List<string>();
         public List<Words> words = null;
 
         int flag_IsLeft = -1;
@@ -83,101 +79,62 @@ namespace English
         }
 
 
-        private List<string> GetUrls(string html)
+        public void TranslateAsync(string text, string sl, string tl, TextBox tb, bool ao = false, CheckBox checkBox_ao = null, TextBox textBox_ao = null)
         {
-            var urls = new List<string>();
-
-            string search = "eg;base64,(.*?)\"";
-            MatchCollection matches = Regex.Matches(html, search);
-
-            foreach (Match match in matches)
+            Task.Factory.StartNew(() =>
             {
-                urls.Add(match.Groups[1].Value);
-            }
+                var tk = GoogleTranslate.TL(text);
+                var site = string.Format(Config.g_domain + "_tts?ie=UTF-8&q={0}&tl={1}&tk={2}&client=webapp", Uri.EscapeDataString(text), sl, tk);
+                GoogleTranslate.voice_url[0] = site;
+                string result = "";
 
-            return urls;
-        }
-
-
-        public Image Base64ToImage(string base64String)
-        {
-            try
-            {
-                base64String = base64String.Replace("\\u003d", "=");
-                byte[] imageBytes = Convert.FromBase64String(base64String);
-                MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
-                ms.Write(imageBytes, 0, imageBytes.Length);
-                Image image = Image.FromStream(ms, true);
-                return image;
-            }
-            catch (Exception ex)
-            { MessageBox.Show(ex.ToString());  return null; }
-        }
-
-
-        public void GetImage(string text, Control pb)
-        {
-            var domain = "https://www.google.com.ua";
-            var url = $"{domain}/search?q={Uri.EscapeDataString(text)}&tbm=isch";
-            string result = "";
-
-            try
-            {
-                var request = (HttpWebRequest)WebRequest.Create(url);
-                request.Accept = "text/html, application/xhtml+xml, */*";
-                request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko";
-
-                var response = (HttpWebResponse)request.GetResponse();
-
-                using (Stream dataStream = response.GetResponseStream())
+                try
                 {
-                    using (var sr = new StreamReader(dataStream))
+                    var cookies = new CookieContainer();
+                    ServicePointManager.Expect100Continue = false;
+                    var request = (HttpWebRequest)WebRequest.Create(string.Format(Config.g_domain + "_a/t?client=mt&sl={0}&tl={1}&hl={1}&v=1.0&source=baf&tk={2}&q={3}", sl, tl, tk, text));
+
+                    request.CookieContainer = cookies;
+                    request.Method = "POST";
+                    request.ContentType = "application/x-www-form-urlencoded";
+                    request.UserAgent = @"Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.0.4) Gecko/20060508 Firefox/1.5.0.4";
+
+
+                    using (var requestStream = request.GetRequestStream())
+                    using (var responseStream = request.GetResponse().GetResponseStream())
+                    using (var reader = new System.IO.StreamReader(responseStream, Encoding.GetEncoding("UTF-8")))
                     {
-                        var pos = -1;
-                        do
-                        {
-                            result = sr.ReadLine();
-                            pos = result.IndexOf("eg;base64,");
-                        }
-                        while (pos == -1);
-                        result += sr.ReadLine();
-                        result += sr.ReadLine();
-                        result += sr.ReadLine();
-                        result += sr.ReadLine();
-                        result += sr.ReadLine();
-                        result += sr.ReadLine();
-                        result += sr.ReadLine();
-                        result += sr.ReadLine();
-                        result += sr.ReadLine();
-                        result += sr.ReadLine();
-                        result += sr.ReadLine();
-                        result += sr.ReadLine();
-                        result += sr.ReadLine();
-                        result += sr.ReadLine();
-                        result += sr.ReadLine();
-                        result += sr.ReadLine();
+                        result = reader.ReadToEnd();
                     }
-                }
-                var startStr = "eg;base64,";
-                var startPos = result.IndexOf(startStr);
-                //var endPos = -1;
-                images_base64 = GetUrls(result);
-                result = images_base64[0];
-                /*if (startPos > -1 && (endPos = result.IndexOf("\"", startPos + 1)) > -1)
-                    result = result.Substring(startPos + startStr.Length, endPos - startPos - startStr.Length);
-                */
-            }
-            catch(Exception ex) { MessageBox.Show(ex.ToString()); }
 
-            try
-            {
-                Invoke(new Action(() =>
+                    var startPos = result.IndexOf("\"");
+                    var endPos = -1;
+
+                    if (startPos > -1 && (endPos = result.IndexOf("\"", startPos + 1)) > -1)
+                        result = result.Substring(startPos + 1, endPos - startPos - 1);
+
+                    tk = GoogleTranslate.TL(result);
+                }
+                catch { }
+
+                site = string.Format(Config.g_domain + "_tts?ie=UTF-8&q={0}&tl={1}&tk={2}&client=webapp", Uri.EscapeDataString(result), tl, tk);
+                GoogleTranslate.voice_url[1] = site;
+
+                try
                 {
-                    //this.textBox_text.Text = result;
-                    pb.BackgroundImage = Base64ToImage(result);
-                }));
-            }
-            catch { }
+                    //Invoke(new Action(() =>
+                    //{
+                    tb.Text = result;
+
+                    if (!ao && checkBox_ao?.Checked != null && checkBox_ao?.Checked != false)
+                    {
+                        var q = result;
+                        new Thread(() => Translate(q, tl, sl, textBox_ao, true, checkBox_ao, textBox_ao)).Start();
+                    }
+                    //}));
+                }
+                catch { }
+            });
         }
 
 
@@ -535,71 +492,6 @@ namespace English
         }
 
 
-        private void comboBox_to_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (comboBox_from.SelectedIndex > -1 && comboBox_to.SelectedIndex > -1)
-                button_translate.PerformClick();
-        }
-
-
-        private void comboBox_from_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (comboBox_from.SelectedIndex > -1 && comboBox_to.SelectedIndex > -1)
-                button_translate.PerformClick();
-        }
-
-
-        private void checkBox_ao_CheckedChanged(object sender, EventArgs e)
-        {
-            textBox_ao.Visible = checkBox_ao.Checked;
-        }
-
-
-        private void button_r_Click(object sender, EventArgs e)
-        {
-            var d = comboBox_from.SelectedIndex;
-
-            comboBox_from.SelectedIndex = comboBox_to.SelectedIndex;
-            comboBox_to.SelectedIndex = d;
-        }
-
-
-        private void button_translate_Click(object sender, EventArgs e)
-        {
-            var q = textBox_text.Text;
-            var sl = comboBox_from.SelectedItem.ToString();
-            var tl = comboBox_to.SelectedItem.ToString();
-
-            new Thread(() => Translate(q, sl, tl, textBox_trans, false, this.checkBox_ao, this.textBox_ao)).Start();
-        }
-
-
-        private void textBox_text_TextChanged(object sender, EventArgs e)
-        {
-            timer_translate_wait.Enabled = false;
-            timer_translate_wait.Enabled = true;
-        }
-
-
-        private void timer_translate_wait_Tick(object sender, EventArgs e)
-        {
-            button_translate.PerformClick();
-            timer_translate_wait.Enabled = false;
-        }
-
-
-        private void button_speak_from_Click(object sender, EventArgs e)
-        {
-            GoogleTranslate.Speak(true);
-        }
-
-
-        private void button_speak_to_Click(object sender, EventArgs e)
-        {
-            GoogleTranslate.Speak(false);
-        }
-
-
         public void panel_main_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -660,30 +552,7 @@ namespace English
 
         private void button_prev_word_Click(object sender, EventArgs e)
         {
-            GoToWord(-1);
-            //var str = "";
-
-            //var newWords = words.GroupBy(w => w.Step)
-            //                    .Select(grp => grp.First())
-            //                    .ToList();
-            //var groupStep = from w in newWords
-            //                select new
-            //                {
-            //                    w.Step,
-            //                    ENG = from w2 in words
-            //                          orderby w2.Step
-            //                          where w.Step == w2.Step
-            //                          select w2
-            //                };
-            //foreach(var wGroup in groupStep)
-            //{
-            //    str += $"{wGroup.Step}\r\n";
-            //    foreach(var w in wGroup.ENG)
-            //    {
-            //        str += $"* {w.Eng} ({w.Step})\r\n";
-            //    }
-            //}
-            //this.textBox_trans.Text = str;    
+            GoToWord(-1);  
         }
 
 
@@ -695,189 +564,15 @@ namespace English
 
         private void button_test_Click(object sender, EventArgs e)
         {
-            var filtered_words = words.Where(x =>
-                                            x.eng_lrn_count < Config.count_to_exclude_word ||
-                                            x.rus_lrn_count < Config.count_to_exclude_word);
-            var filtered_eng_words = filtered_words.Where(x => x.eng_lrn_count < Config.count_to_exclude_word).ToList();
-            var filtered_rus_words = filtered_words.Where(x => x.rus_lrn_count < Config.count_to_exclude_word).ToList();
-
-            filtered_words = null;
-
-            var selected_eng_words = new List<Words>();
-            var selected_rus_words = new List<Words>();
-            var rnd = 0;
-            var words_min = 10;
-            var words_max = Config.countRowsForRetime;
-            var crw = words_min + rand.Next() % (words_max - words_min + 1);
-            var max_eng_count = crw < filtered_eng_words.Count ? crw : filtered_eng_words.Count;
-            var max_rus_count = crw < filtered_rus_words.Count ? crw : filtered_rus_words.Count;
-
-            for (var i = 0; i < max_eng_count; i++)
-            {
-                rnd = rand.Next() % filtered_eng_words.Count;
-                selected_eng_words.Add(filtered_eng_words[rnd]);
-                filtered_eng_words.RemoveAt(rnd);
-            }
-
-            for (var i = 0; i < max_rus_count; i++)
-            {
-                rnd = rand.Next() % filtered_rus_words.Count;
-                selected_rus_words.Add(filtered_rus_words[rnd]);
-                filtered_rus_words.RemoveAt(rnd);
-            }
-
-
-            var testForm = new Form
-            {
-                StartPosition = FormStartPosition.CenterScreen,
-                TopMost = true,
-                BackColor = Color.Black,
-                Size = new Size(1000, 600),
-                AutoScroll = true
-            };
-
-            testForm.VerticalScroll.Visible = true;
-            testForm.HorizontalScroll.Visible = true;
-            testForm.Show();
-
-            for (var i = 0; i < selected_eng_words.Count; i++)
-            {
-                var gb = new GroupBox();
-                gb.Name = $"groupBox_{i + 1}";
-                gb.Parent = testForm;
-                gb.Text = selected_eng_words[i].Eng;
-                gb.Dock = DockStyle.Top;
-                gb.ForeColor = Color.Magenta;
-                gb.AutoSize = true;
-                gb.Font = new Font(testForm.Font.FontFamily, 16, FontStyle.Bold);
-
-                rnd = rand.Next() % 4;
-                for (var j = 0; j < 4; j++)
-                {
-                    try
-                    {
-                        var rb = new RadioButton();
-                        rb.Name = $"radioButton_{i + 1}_{j + 1}";
-                        if (rnd == j)
-                            rb.Text = selected_eng_words[i].Rus;
-                        else
-                        {
-                            var eng_words = words.Where(x => x.eng_lrn_count < Config.count_to_exclude_word && x.Rus != selected_eng_words[i].Rus).ToList();
-                            var rnd2 = rand.Next() % eng_words.Count;
-                            rb.Text = eng_words[rnd2].Rus;
-                        }
-
-                        rb.Font = new Font(testForm.Font.FontFamily, 10);
-                        rb.AutoSize = true;
-                        rb.Parent = gb;
-                        rb.Dock = DockStyle.Top;
-                        rb.ForeColor = Color.White;
-                        rb.Cursor = Cursors.Hand;
-                        rb.CheckedChanged += new System.EventHandler(this.radioButton_checkChanged);
-                        rb.MouseEnter += new System.EventHandler(this.control_chg_MouseEnter);
-                        rb.MouseLeave += new System.EventHandler(this.control_chg_MouseLeave);
-                    }
-                    catch { }
-                }
-                
-            }
-
-            for (var i = 0; i < selected_rus_words.Count; i++)
-            {
-                var gb = new GroupBox();
-                gb.Name = $"groupBox_r_{i + 1}";
-                gb.Parent = testForm;
-                gb.Text = selected_rus_words[i].Rus;
-                gb.Dock = DockStyle.Top;
-                gb.AutoSize = true;
-                gb.ForeColor = Color.Magenta;
-                gb.Font = new Font(testForm.Font.FontFamily, 16, FontStyle.Bold);
-
-                rnd = rand.Next() % 4;
-                for (var j = 0; j < 4; j++)
-                {
-                    try
-                    {
-                        var rb = new RadioButton();
-                        rb.Name = $"radioButton_r_{i + 1}_{j + 1}";
-                        if (rnd == j)
-                            rb.Text = selected_rus_words[i].Eng;
-                        else
-                        {
-                            var rus_words = words.Where(x => x.rus_lrn_count < Config.count_to_exclude_word && x.Eng != selected_rus_words[i].Eng).ToList();
-                            var rnd2 = rand.Next() % rus_words.Count;
-                            rb.Text = rus_words[rnd2].Eng;
-                        }
-
-                        rb.Font = new Font(testForm.Font.FontFamily, 10);
-                        rb.AutoSize = true;
-                        rb.Parent = gb;
-                        rb.Dock = DockStyle.Top;
-                        rb.Cursor = Cursors.Hand;
-                        rb.ForeColor = Color.White;
-                        rb.CheckedChanged += new System.EventHandler(this.radioButton_r_checkChanged);
-                        rb.MouseEnter += new System.EventHandler(this.control_chg_MouseEnter);
-                        rb.MouseLeave += new System.EventHandler(this.control_chg_MouseLeave);
-                    }
-                    catch { }
-                }
-
-            }
+            CreateTest();
         }
 
-
-        private void radioButton_checkChanged(object sender, EventArgs e)
-        {
-            var rb = (RadioButton)sender;
-            var gb = rb.Parent;
-            gb.BackColor = Color.Red;
-            words.Where(w => w.Eng == gb.Text && w.Rus == rb.Text).ToList().ForEach(f => 
-                {
-                    f.eng_lrn_count += 1;
-                    gb.BackColor = Color.Green;
-                    GoogleTranslate.Speak(f.Eng);
-                    gb.Text += $" ({f.eng_lrn_count})";
-                }
-            );
-            gb.Enabled = false;
-            new Thread(() => HideGroupBox(gb)).Start();
-        }
-
-
-        private void radioButton_r_checkChanged(object sender, EventArgs e)
-        {
-            var rb = (RadioButton)sender;
-            var gb = rb.Parent;
-            gb.BackColor = Color.Red;
-            words.Where(w => w.Rus == gb.Text && w.Eng == rb.Text).ToList().ForEach(f => 
-                {
-                    f.rus_lrn_count += 1;
-                    gb.BackColor = Color.Green;
-                    gb.Text += $" ({f.eng_lrn_count})";
-                    GoogleTranslate.Speak(f.Eng);
-                }
-            );
-            gb.Enabled = false;
-            new Thread(() => HideGroupBox(gb)).Start();
-        }
-
-
-        private void HideGroupBox(Control gb)
-        {
-            Thread.Sleep(300);
-
-            Invoke(new Action(() =>
-            {
-                gb.Dispose();
-                gb = null;
-            }
-            ));
-        }
 
         private void button_exit_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
 
         private void button_hide_Click(object sender, EventArgs e)
         {
